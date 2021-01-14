@@ -75,7 +75,7 @@ public:
 class Kelner :public User {
 public:
 	string zwroc_dane() {
-		string dane_pracownika = "(Kierownik) " + imie + " " + nazwisko;
+		string dane_pracownika = "(Kelner) " + imie + " " + nazwisko;
 		return dane_pracownika;
 	}
 	Kelner() {
