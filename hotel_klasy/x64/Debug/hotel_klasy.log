@@ -1,2 +1,5 @@
 ﻿  hotel_klasy.cpp
+  main.cpp
+C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\main.cpp(6,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
   hotel_klasy.vcxproj -> C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\x64\Debug\hotel_klasy.exe

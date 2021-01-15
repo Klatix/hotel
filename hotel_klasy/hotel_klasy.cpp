@@ -164,9 +164,11 @@ public:
 	void potwiedz_rezerwacje(int numer_ID, int godzina, int minuta, int dzien, int miesiac, int rok, int na_ile, Rezerwacja_spa*& head)
 		{
 			cout << "Twoja rezerwacja zaczyna sie od: " << godzina << ":" << minuta << " " << dzien << "." << miesiac << "." << rok << " do ";
-		if (minuta + na_ile >= 60)
+		if (minuta + na_ile >= 60) 
 		{
-			cout << godzina + 1 << ":" << minuta + na_ile - 60 << " " << dzien << "." << miesiac << "." << rok << endl;
+			godzina = godzina + 1;
+			minuta = minuta + na_ile - 60;
+			cout << godzina  << ":" << minuta << " " << dzien << "." << miesiac << "." << rok << endl;
 		}
 		else {
 			cout << godzina << ":" << minuta + na_ile << " " << dzien << "." << miesiac << "." << rok << endl;
