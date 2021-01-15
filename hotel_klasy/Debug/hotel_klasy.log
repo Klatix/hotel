@@ -1,0 +1,5 @@
+﻿  hotel_klasy.cpp
+  main.cpp
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\main.cpp(4,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+  Generowanie kodu...
+  hotel_klasy.vcxproj -> C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\Debug\hotel_klasy.exe

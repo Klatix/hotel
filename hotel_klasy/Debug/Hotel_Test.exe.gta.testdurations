@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\Debug\Hotel_Test.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="TestCaseName.TestName" Duration="1" />
+    <TestDuration Test="USER_TEST.TEST_KLIENTA" Duration="1" />
+    <TestDuration Test="USER_TEST.TEST_KONSTRUKTORÓW_KLIENTA" Duration="1" />
+    <TestDuration Test="USER_TEST.TEST_KONSTRUKTOROW_KLIENT" Duration="1" />
+    <TestDuration Test="USER_TEST.TEST_KONSTRUKTOROW_KIEROWNIK" Duration="1" />
+    <TestDuration Test="USER_TEST.TEST_KONSTRUKTOROW_KELNER" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>
