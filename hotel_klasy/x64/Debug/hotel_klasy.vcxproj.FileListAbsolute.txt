@@ -1,0 +1,5 @@
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\hotel_klasy.vcxproj.CopyComplete
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\hotel_klasy.exe
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\hotel_klasy.pdb
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\gtest.pdb
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\gtest_main.pdb

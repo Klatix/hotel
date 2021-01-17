@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <time.h>
 #include "header.h"
+#include <vector>
 using namespace std;
 //klasa abstrakcyjna z której dziedziczyć będą klasy Kelner, Klient i Kierownik
 class User{
@@ -189,3 +190,169 @@ public:
 		}
 
 };
+struct Data {
+
+	int godzina, minuta, dzien, miesiac, rok = NULL;
+	Data() {};
+	Data(int h, int m, int d, int mth, int yr) {
+		godzina = h;
+		minuta = m;
+		dzien = d;
+		miesiac = mth;
+		rok = yr;
+	}
+	Data(int d, int m, int y) {
+		dzien = d;
+		miesiac = m;
+		rok = y;
+
+	}
+	void wpisz_date_ogolna() {
+		cout << "Podaj date ( D M R ): ";
+		cin >> dzien;
+		cin >> miesiac;
+		cin >> rok;
+	}
+	void wpisz_date_szczegolowa() {
+		cout << "Podaj date ( D M R ): " <<endl;
+		cin >> dzien;
+		cin >> miesiac;
+		cin >> rok;
+		cout << "Podaj godzine ( H M ): " << endl;
+		cin >> godzina;
+		cin >> minuta;
+	}
+};
+struct Dostepnosc_pokoju {
+	vector<Data> poczatek;
+	vector<Data> koniec;
+};
+
+class Pokoj {
+public:
+	int nr_pokoju=NULL;
+	float cena = NULL;
+	int max_ilosc_osob = NULL;
+	Dostepnosc_pokoju lista_dostepnosci;
+
+	bool sprawdz_dostepnosc(Data data_uzytkownia_p, Data data_uzytkownia_k) {
+
+
+		for (int i = 0; i < lista_dostepnosci.poczatek.size(); i++) {
+			if ((data_uzytkownia_p.dzien > lista_dostepnosci.poczatek[i].dzien && data_uzytkownia_p.dzien < lista_dostepnosci.koniec[i].dzien)|| (data_uzytkownia_k.dzien > lista_dostepnosci.poczatek[i].dzien && data_uzytkownia_k.dzien < lista_dostepnosci.koniec[i].dzien)) {
+				cout << "Data od " << lista_dostepnosci.poczatek[i].dzien << "." << lista_dostepnosci.poczatek[i].miesiac << "." << lista_dostepnosci.poczatek[i].rok << " do " << lista_dostepnosci.koniec[i].dzien << "." << lista_dostepnosci.koniec[i].miesiac << "." << lista_dostepnosci.koniec[i].rok << " jest zajeta" << endl;
+				return false;
+			}
+		}
+		cout << "Podana data jest dostepna!" << endl;
+		return true;
+
+	}
+	Pokoj(){}
+	Pokoj(int nr, float c, int max) {
+		nr_pokoju = nr;
+		cena = c;
+		max_ilosc_osob = max;
+		//lista_dostepnosci = ld;
+	}
+	Pokoj(int nr, float c, int max, Dostepnosc_pokoju ld) {
+		nr_pokoju = nr;
+		cena = c;
+		max_ilosc_osob = max;
+		lista_dostepnosci = ld;
+	}
+
+};
+
+class Rezerwacja_pokoju {
+private:
+	
+	Data data_poczatku;
+	Data data_konca;
+	Pokoj zarezerwowany_pokoj;
+	int nr_rezerwacji = NULL;
+public:
+	
+	void zarezerwuj_pokoj(vector<Pokoj> lista_pokojow)
+	{
+		int nr_pokoju;
+		for (int i = 0; i < lista_pokojow.size(); i++) {
+			cout << "Pokoj [" << i+1 << "] | cena: " << lista_pokojow[i].cena << "PLN | maksymalna ilosc osob w pokoju: " << lista_pokojow[i].max_ilosc_osob << endl;
+		}
+		cout << "Wybierz pokoj: " << endl;
+		cin >> nr_pokoju;
+		Data data_uzytkownia_p, data_uzytkownia_k;
+		cout << "Data poczatku pobytu: " << endl;
+		data_uzytkownia_p.wpisz_date_ogolna();
+		cout << "Data konca pobytu: " << endl;
+		data_uzytkownia_k.wpisz_date_ogolna();
+		if (lista_pokojow[nr_pokoju - 1].sprawdz_dostepnosc(data_uzytkownia_p, data_uzytkownia_k) == true) {
+			int a;
+			cout << "Potwierdz rezerwacje - 1 " << endl;
+			cout << "Anuluj rezerwacje - 2 " << endl;
+			cin >> a;
+			if (a == 1) {
+
+				zarezerwowany_pokoj = lista_pokojow[nr_pokoju - 1];
+				potwierdz_rezerwacje(nr_pokoju, data_uzytkownia_p, data_uzytkownia_k);
+			}
+			if (a == 2) {
+				cout << "Rezerwacja anulowana" << endl;
+			}
+		}
+	}
+	//void potwierdz_rezerwacje() {}
+	void usun_rezerwacje(){
+		if (nr_rezerwacji != NULL) {
+
+			zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.poczatek.begin() + nr_rezerwacji-1);
+			zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.poczatek.begin() + nr_rezerwacji-1);
+		}
+	}
+	void modyfikuj_rezerwacje() {
+		if (nr_rezerwacji != NULL) {
+			int a;
+			cout << "Co chcesz zrobic ze swoja rezerwacja?" << endl;
+			cout << "[1] usun" << endl;
+			cout << "[2] zmien date" << endl;
+			cin >> a;
+			if (a==1) {
+				usun_rezerwacje();
+			}
+			else if (a == 2) {
+				zmien_date();
+			}
+		}
+	}
+	void zmien_date() {
+		Data n_data_p, n_data_k;
+		cout << "Twoja obecna data rezerwacji: " << data_poczatku.dzien << "." << data_konca.miesiac << "." << data_konca.rok << endl;
+		cout << "Wprowadz nowa date:" << endl;
+		cout << "Poczatek: ";
+		n_data_p.wpisz_date_ogolna();
+		cout << "Koniec: ";
+		n_data_k.wpisz_date_ogolna();
+		if (zarezerwowany_pokoj.sprawdz_dostepnosc(n_data_p, n_data_k) == true) {
+			potwierdz_modyfikacje(n_data_p, n_data_k);
+		}
+	}
+	void potwierdz_rezerwacje(int nr, Data p, Data k) {
+		cout << "Rezerwacja potwierdzona" << endl;
+		data_poczatku = p;
+		data_konca = k;
+		zarezerwowany_pokoj.lista_dostepnosci.poczatek.push_back(p);
+		zarezerwowany_pokoj.lista_dostepnosci.koniec.push_back(k);
+		nr_rezerwacji = zarezerwowany_pokoj.lista_dostepnosci.poczatek.size();
+	}
+	void potwierdz_modyfikacje(Data p, Data k) {
+		data_poczatku = p;
+		data_konca = k;
+		usun_rezerwacje();
+		zarezerwowany_pokoj.lista_dostepnosci.poczatek.push_back(p);
+		zarezerwowany_pokoj.lista_dostepnosci.koniec.push_back(k);
+		nr_rezerwacji = zarezerwowany_pokoj.lista_dostepnosci.poczatek.size();
+	}
+	bool obsluga_platnosci() {}
+
+};
+

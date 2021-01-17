@@ -1,6 +1,35 @@
 #include <iostream>
 #include "hotel_klasy.cpp"
 int main() {
+	////////////////////
+	//DATA BANK
+	//zawiera informacje o pokojach
+	////////////////////
+
+	Data dp1(1, 2, 2021);
+	Data dk1(7, 2, 2021);
+//	Data dp2(19, 2, 2021);
+//	Data dk2(23, 2, 2021);
+	Dostepnosc_pokoju dostepnosc;
+	dostepnosc.poczatek.push_back(dp1);
+	dostepnosc.koniec.push_back(dk1);
+	//dostepnosc.poczatek.push_back(dp2);
+	//dostepnosc.koniec.push_back(dp2);
+	vector<Pokoj> lista_pokojow;
+	Pokoj pokoj1(1, 450, 3, dostepnosc);
+	Pokoj pokoj2(2, 540, 4, dostepnosc);
+	Pokoj pokoj3(3, 300, 2, dostepnosc);
+	Pokoj pokoj4(4, 249, 1, dostepnosc);
+	lista_pokojow.push_back(pokoj1);
+	lista_pokojow.push_back(pokoj2);
+	lista_pokojow.push_back(pokoj3);
+	lista_pokojow.push_back(pokoj4);
+
+
+	//cout << rez1.nr_rezerwacji;
+	///////////////////////////
+
+	/*
 	Rezerwacja_spa* head = new Rezerwacja_spa;
 	head->next = NULL;
 	srand(time(NULL));
@@ -39,4 +68,5 @@ int main() {
 	{
 		cout << "BLAD!" << endl;
 	}
+	*/
 }
