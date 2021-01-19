@@ -1,11 +1,35 @@
-#include <iostream>
+//#include <iostream>
 #include "hotel_klasy.cpp"
 int main() {
+	Rezerwacja_pokoju rez1;
+	Data dp1(1, 2, 2021);
+	Data dk1(7, 2, 2021);
+	Data dp2(19, 2, 2021);
+	Data dk2(23, 2, 2021);
+	Data dp3(27, 2, 2021);
+	Data dk3(28, 2, 2021);
+	Dostepnosc_pokoju dostepnosc;
+	dostepnosc.poczatek.push_back(dp1);
+	dostepnosc.koniec.push_back(dk1);
+	dostepnosc.poczatek.push_back(dp3);
+	dostepnosc.koniec.push_back(dk3);
+
+	vector<Pokoj> lista_pokojow;
+	Pokoj pokoj1(1, 450, 3, dostepnosc);
+	lista_pokojow.push_back(pokoj1);
+
+	//EXPECT_EQ(rez1.rezerwacja_pokoju(1, dp2, dk2, lista_pokojow), true);
+	//EXPECT_EQ(rez1.get_dokonano_rezerwacji(), true);
+
+	//rez1.usun_rezerwacje();
+	//EXPECT_EQ(rez1.get_dokonano_rezerwacji(), false);
+
+
 	////////////////////
 	//DATA BANK
 	//zawiera informacje o pokojach
 	////////////////////
-
+/*
 	Data dp1(1, 2, 2021);
 	Data dk1(7, 2, 2021);
 //	Data dp2(19, 2, 2021);
@@ -24,7 +48,7 @@ int main() {
 	lista_pokojow.push_back(pokoj2);
 	lista_pokojow.push_back(pokoj3);
 	lista_pokojow.push_back(pokoj4);
-
+	*/
 
 	//cout << rez1.nr_rezerwacji;
 	///////////////////////////

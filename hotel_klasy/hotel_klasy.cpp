@@ -223,6 +223,33 @@ struct Data {
 		cin >> minuta;
 	}
 };
+
+//funkcja porownojaca dwie daty, wykorzystywana przy sprawdzaniu dostepnosci przy rezerwacji pokoju
+//zwraca 1 jesli pierwsza data jest pozniejsza, zwraca 2 jesli druga data jest pozniejsza, zwraca 0 jesli sa rowne
+inline int cmp_date(Data data1, Data data2) {
+	if (data1.rok > data2.rok) {
+		return 1;
+	}
+	else if (data1.rok < data2.rok) {
+		return 2;
+	}
+	else if (data1.miesiac > data2.miesiac) {
+		return 1;
+	}
+	else if (data1.miesiac < data2.miesiac) {
+		return 2;
+	}
+	else if (data1.dzien > data2.dzien) {
+		return 1;
+	}
+	else if (data1.dzien < data2.dzien) {
+		return 2;
+	}
+	else {
+		return 0;
+	}
+}
+
 struct Dostepnosc_pokoju {
 	vector<Data> poczatek;
 	vector<Data> koniec;
@@ -239,7 +266,12 @@ public:
 
 
 		for (int i = 0; i < lista_dostepnosci.poczatek.size(); i++) {
-			if ((data_uzytkownia_p.dzien > lista_dostepnosci.poczatek[i].dzien && data_uzytkownia_p.dzien < lista_dostepnosci.koniec[i].dzien)|| (data_uzytkownia_k.dzien > lista_dostepnosci.poczatek[i].dzien && data_uzytkownia_k.dzien < lista_dostepnosci.koniec[i].dzien)) {
+			if ( ((cmp_date(data_uzytkownia_p, lista_dostepnosci.poczatek[i]) == 1) && (cmp_date(data_uzytkownia_p, lista_dostepnosci.koniec[i]) == 2)) ||
+				 ((cmp_date(data_uzytkownia_k, lista_dostepnosci.poczatek[i]) == 1) && (cmp_date(data_uzytkownia_k, lista_dostepnosci.koniec[i]) == 2)) ||
+				 ((cmp_date(lista_dostepnosci.poczatek[i], data_uzytkownia_p) == 1) && (cmp_date(lista_dostepnosci.poczatek[i], data_uzytkownia_k) == 2)) ||
+				 ((cmp_date(lista_dostepnosci.koniec[i], data_uzytkownia_p) == 1) && (cmp_date(lista_dostepnosci.koniec[i], data_uzytkownia_k) == 2))
+				) {
+				
 				cout << "Data od " << lista_dostepnosci.poczatek[i].dzien << "." << lista_dostepnosci.poczatek[i].miesiac << "." << lista_dostepnosci.poczatek[i].rok << " do " << lista_dostepnosci.koniec[i].dzien << "." << lista_dostepnosci.koniec[i].miesiac << "." << lista_dostepnosci.koniec[i].rok << " jest zajeta" << endl;
 				return false;
 			}
@@ -248,12 +280,13 @@ public:
 		return true;
 
 	}
+
 	Pokoj(){}
 	Pokoj(int nr, float c, int max) {
 		nr_pokoju = nr;
 		cena = c;
 		max_ilosc_osob = max;
-		//lista_dostepnosci = ld;
+		
 	}
 	Pokoj(int nr, float c, int max, Dostepnosc_pokoju ld) {
 		nr_pokoju = nr;
@@ -270,10 +303,10 @@ private:
 	Data data_poczatku;
 	Data data_konca;
 	Pokoj zarezerwowany_pokoj;
-	int nr_rezerwacji = NULL;
+	bool dokonano_rezerwacji = false;
 public:
 	
-	void zarezerwuj_pokoj(vector<Pokoj> lista_pokojow)
+	void wybierz_pokoj(vector<Pokoj> lista_pokojow)
 	{
 		int nr_pokoju;
 		for (int i = 0; i < lista_pokojow.size(); i++) {
@@ -286,31 +319,30 @@ public:
 		data_uzytkownia_p.wpisz_date_ogolna();
 		cout << "Data konca pobytu: " << endl;
 		data_uzytkownia_k.wpisz_date_ogolna();
-		if (lista_pokojow[nr_pokoju - 1].sprawdz_dostepnosc(data_uzytkownia_p, data_uzytkownia_k) == true) {
-			int a;
-			cout << "Potwierdz rezerwacje - 1 " << endl;
-			cout << "Anuluj rezerwacje - 2 " << endl;
-			cin >> a;
-			if (a == 1) {
-
-				zarezerwowany_pokoj = lista_pokojow[nr_pokoju - 1];
-				potwierdz_rezerwacje(nr_pokoju, data_uzytkownia_p, data_uzytkownia_k);
-			}
-			if (a == 2) {
-				cout << "Rezerwacja anulowana" << endl;
-			}
-		}
+		rezerwacja_pokoju(nr_pokoju, data_uzytkownia_p, data_uzytkownia_k, lista_pokojow);
 	}
-	//void potwierdz_rezerwacje() {}
-	void usun_rezerwacje(){
-		if (nr_rezerwacji != NULL) {
 
-			zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.poczatek.begin() + nr_rezerwacji-1);
-			zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.poczatek.begin() + nr_rezerwacji-1);
+	void usun_rezerwacje(){
+		if (dokonano_rezerwacji != false) {
+			
+			for (int i = 0; i < zarezerwowany_pokoj.lista_dostepnosci.poczatek.size(); i++) {
+				
+				if (data_poczatku.dzien == zarezerwowany_pokoj.lista_dostepnosci.poczatek[i].dzien && data_poczatku.miesiac == zarezerwowany_pokoj.lista_dostepnosci.poczatek[i].miesiac && data_poczatku.rok == zarezerwowany_pokoj.lista_dostepnosci.poczatek[i].rok) {
+					
+					zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.poczatek.begin() + i);
+					zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.koniec.begin() + i);
+					dokonano_rezerwacji = false;
+				}
+				
+				
+			}
+			
+			//remove(zarezerwowany_pokoj.lista_dostepnosci.poczatek.begin(), zarezerwowany_pokoj.lista_dostepnosci.poczatek.end(), data_poczatku);
+			//remove(zarezerwowany_pokoj.lista_dostepnosci.koniec.begin(), zarezerwowany_pokoj.lista_dostepnosci.koniec.end(), data_konca);
 		}
 	}
 	void modyfikuj_rezerwacje() {
-		if (nr_rezerwacji != NULL) {
+		if (dokonano_rezerwacji != false) {
 			int a;
 			cout << "Co chcesz zrobic ze swoja rezerwacja?" << endl;
 			cout << "[1] usun" << endl;
@@ -336,13 +368,33 @@ public:
 			potwierdz_modyfikacje(n_data_p, n_data_k);
 		}
 	}
-	void potwierdz_rezerwacje(int nr, Data p, Data k) {
-		cout << "Rezerwacja potwierdzona" << endl;
-		data_poczatku = p;
-		data_konca = k;
-		zarezerwowany_pokoj.lista_dostepnosci.poczatek.push_back(p);
-		zarezerwowany_pokoj.lista_dostepnosci.koniec.push_back(k);
-		nr_rezerwacji = zarezerwowany_pokoj.lista_dostepnosci.poczatek.size();
+	bool rezerwacja_pokoju(int nr, Data p, Data k, vector<Pokoj> lista_pokojow) {
+		if (lista_pokojow[nr - 1].sprawdz_dostepnosc(p, k) == true) {
+			/*
+			if (a == 1) {
+
+				zarezerwowany_pokoj = lista_pokojow[nr_pokoju - 1];
+				potwierdz_rezerwacje(nr_pokoju, data_uzytkownia_p, data_uzytkownia_k);
+
+			}
+			if (a == 2) {
+				cout << "Rezerwacja anulowana" << endl;
+
+			}
+			*/
+			cout << "Rezerwacja potwierdzona" << endl;
+			data_poczatku = p;
+			data_konca = k;
+			zarezerwowany_pokoj=lista_pokojow[nr-1];
+			zarezerwowany_pokoj.lista_dostepnosci.poczatek.push_back(p);
+			zarezerwowany_pokoj.lista_dostepnosci.koniec.push_back(k);
+			dokonano_rezerwacji = true;
+			return true;
+		}
+		else {
+			return false;
+		}
+
 	}
 	void potwierdz_modyfikacje(Data p, Data k) {
 		data_poczatku = p;
@@ -350,7 +402,11 @@ public:
 		usun_rezerwacje();
 		zarezerwowany_pokoj.lista_dostepnosci.poczatek.push_back(p);
 		zarezerwowany_pokoj.lista_dostepnosci.koniec.push_back(k);
-		nr_rezerwacji = zarezerwowany_pokoj.lista_dostepnosci.poczatek.size();
+		dokonano_rezerwacji = true;
+	}
+	bool get_dokonano_rezerwacji()
+	{
+		return dokonano_rezerwacji;
 	}
 	bool obsluga_platnosci() {}
 
