@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Executable>C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\Hotel_Test.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="TestCaseName.TestName" Duration="1" />
+    <TestDuration Test="USER_TEST.TEST_KONSTRUKTOROW_KLIENT" Duration="1" />
+    <TestDuration Test="USER_TEST.TEST_KONSTRUKTOROW_KIEROWNIK" Duration="1" />
+    <TestDuration Test="USER_TEST.TEST_KONSTRUKTOROW_KELNER" Duration="1" />
+    <TestDuration Test="USER_TEST.TEST_CMP_DATA" Duration="1" />
+    <TestDuration Test="FUNCTION_TEST.TEST_CMP_DATA" Duration="1" />
+    <TestDuration Test="METHOD_TEST.TEST_SPRAWDZ_DOSTEPNOSC_POKOJU" Duration="1" />
+    <TestDuration Test="METHOD_TEST.TEST_KONSTRUKTOROW_KLIENT" Duration="1" />
+    <TestDuration Test="METHOD_TEST.TEST_KONSTRUKTOROW_KIEROWNIK" Duration="1" />
+    <TestDuration Test="METHOD_TEST.TEST_KONSTRUKTOROW_KELNER" Duration="1" />
+    <TestDuration Test="METHOD_TEST.TEST_USUN_REZERWACJE" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>
