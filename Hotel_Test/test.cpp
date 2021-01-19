@@ -88,9 +88,9 @@ TEST(METHOD_TEST, TEST_USUN_REZERWACJE) {
 	
 	EXPECT_EQ(rez1.rezerwacja_pokoju(1, dp2, dk2, lista_pokojow), true);
 	EXPECT_EQ(rez1.get_dokonano_rezerwacji(), true);
-	/*
+	
 	rez1.usun_rezerwacje();
 	EXPECT_EQ(rez1.get_dokonano_rezerwacji(), false);
-	*/
+	
 
 }

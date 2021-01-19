@@ -322,6 +322,13 @@ public:
 		rezerwacja_pokoju(nr_pokoju, data_uzytkownia_p, data_uzytkownia_k, lista_pokojow);
 	}
 
+	
+	void remove(vector<Data>& vec, size_t pos)
+	{
+		vector<Data>::iterator it = vec.begin();
+		advance(it, pos);
+		vec.erase(it);
+	}
 	void usun_rezerwacje(){
 		if (dokonano_rezerwacji != false) {
 			
@@ -329,8 +336,10 @@ public:
 				
 				if (data_poczatku.dzien == zarezerwowany_pokoj.lista_dostepnosci.poczatek[i].dzien && data_poczatku.miesiac == zarezerwowany_pokoj.lista_dostepnosci.poczatek[i].miesiac && data_poczatku.rok == zarezerwowany_pokoj.lista_dostepnosci.poczatek[i].rok) {
 					
-					zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.poczatek.begin() + i);
-					zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.koniec.begin() + i);
+					remove(zarezerwowany_pokoj.lista_dostepnosci.poczatek, i);
+					remove(zarezerwowany_pokoj.lista_dostepnosci.koniec, i);
+					//zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.poczatek.begin() + i);
+					//zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.koniec.begin() + i);
 					dokonano_rezerwacji = false;
 				}
 				
