@@ -61,7 +61,11 @@ struct Data {
 
 		if (dzien > 0 && dzien < 31 && miesiac > 0 && miesiac < 13 && rok > 2020)
 		{
+<<<<<<< Updated upstream
 			cout << "Data zostala zapisana!" << endl;
+=======
+			//cout << "Data zostala zapisana!" << endl;
+>>>>>>> Stashed changes
 		}
 		else {
 			cout << "BLEDNIE WPROWADZONA DATA!" << endl;
@@ -81,7 +85,11 @@ struct Data {
 
 		if (dzien > 0 && dzien < 31 && miesiac > 0 && miesiac < 13 && rok > 2020 && godzina >= 0 && godzina < 25 && minuta >= 0 && minuta < 65)
 		{
+<<<<<<< Updated upstream
 			cout << "Data zostala zapisana!" << endl;
+=======
+			//cout << "Data zostala zapisana!" << endl;
+>>>>>>> Stashed changes
 		}
 		else {
 			cout << "BLEDNIE WPROWADZONA DATA!" << endl;
@@ -190,7 +198,11 @@ struct Rezerwacja_spa
 class Spa :public Rezerwacja_spa {
 	Rezerwacja_spa lista;
 public:
+<<<<<<< Updated upstream
 	Spa(){}
+=======
+	Spa() {}
+>>>>>>> Stashed changes
 	Spa(string u, int id, int g, int m, int d, int mth, int y, int ile)
 	{
 		usluga = u;
@@ -221,6 +233,7 @@ public:
 		}
 	}
 
+<<<<<<< Updated upstream
 	/*
 	void dodaj_rezerwacje(vector<Spa> *lista2, string u, int id, int g, int m, int d, int mth, int y, int ile)
 	{
@@ -246,6 +259,19 @@ public:
 		lista2[rozmiar].data.rok = y;
 		lista2[rozmiar].na_ile = ile;
 	}*/
+=======
+	
+	void dodaj_rezerwacje(int id)
+	{
+		cout << "Podaj data na ktora chcesz zarezerwowac miejsce" << endl;
+		data.wpisz_date_szczegolowa();
+		cout << "Podaj rodzaj uslugi (BASEN/SAUNA): ";
+		cin >> usluga;
+		cout << "Podaj na ile chcesz dokonac rezerwacji (w minutach): ";
+		cin >> na_ile;
+		cout << "\nTwoja rezerwacja zostala zapisana!" << endl;
+	}
+>>>>>>> Stashed changes
 
 
 
@@ -253,7 +279,11 @@ public:
 
 	/*void dodaj_rezerwacje(string usluga, int numer_ID, int godzina, int minuta, int dzien, int miesiac, int rok, int na_ile)
 	{
+<<<<<<< Updated upstream
 		
+=======
+
+>>>>>>> Stashed changes
 		nodetoadd->numer_ID = numer_ID;
 		nodetoadd->data.godzina = godzina;
 		nodetoadd->data.minuta = minuta;
@@ -261,7 +291,6 @@ public:
 		nodetoadd->data.miesiac = miesiac;
 		nodetoadd->data.rok = rok;
 		nodetoadd->na_ile = na_ile;
-
 		if (head == NULL)
 		{
 			head = nodetoadd;
@@ -281,10 +310,12 @@ public:
 	{
 		Rezerwacja_spa* pom = new Rezerwacja_spa;
 		pom = head;
-
 		if (head == NULL)
 		{
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 		}
 		else
 		{
@@ -312,7 +343,6 @@ public:
 		else {
 			cout << godzina << ":" << minuta + na_ile << " " << dzien << "." << miesiac << "." << rok << endl;
 		}
-
 		cout << "Aby potwierdzic Twoja rezerwacje wpisz '1', aby odrzucic wpisz '2' " << endl;
 		int wybor;
 		cin >> wybor;
@@ -329,7 +359,37 @@ public:
 
 };
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+
+
+//funkcja porownojaca dwie daty, wykorzystywana przy sprawdzaniu dostepnosci przy rezerwacji pokoju
+//zwraca 1 jesli pierwsza data jest pozniejsza, zwraca 2 jesli druga data jest pozniejsza, zwraca 0 jesli sa rowne
+inline int cmp_date(Data data1, Data data2) {
+	if (data1.rok > data2.rok) {
+		return 1;
+	}
+	else if (data1.rok < data2.rok) {
+		return 2;
+	}
+	else if (data1.miesiac > data2.miesiac) {
+		return 1;
+	}
+	else if (data1.miesiac < data2.miesiac) {
+		return 2;
+	}
+	else if (data1.dzien > data2.dzien) {
+		return 1;
+	}
+	else if (data1.dzien < data2.dzien) {
+		return 2;
+	}
+	else {
+		return 0;
+	}
+}
+>>>>>>> Stashed changes
 
 struct Dostepnosc_pokoju {
 	vector<Data> poczatek;

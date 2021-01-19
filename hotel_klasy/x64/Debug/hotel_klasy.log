@@ -1,6 +1,7 @@
 ﻿  hotel_klasy.cpp
 <<<<<<< Updated upstream
   main.cpp
+<<<<<<< Updated upstream
 C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\main.cpp(6,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 =======
 C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\hotel_klasy.cpp(448,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
@@ -9,6 +10,9 @@ C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\hotel_klasy.cpp(45
 C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\hotel_klasy.cpp(448,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\hotel_klasy.cpp(456,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\main.cpp(35,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+>>>>>>> Stashed changes
+=======
+C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\main.cpp(60,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 >>>>>>> Stashed changes
   Generating Code...
   hotel_klasy.vcxproj -> C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\x64\Debug\hotel_klasy.exe
