@@ -87,7 +87,6 @@ int main() {
 		Spa s1("BASEN", klient1.zwroc_ID(), 18, 30, 14, 10, 2021, 45);
 		Spa s2("BASEN", klient1.zwroc_ID(), 15, 30, 14, 10, 2021, 55);
 		Spa s3("BASEN", klient1.zwroc_ID(), 13, 30, 14, 10, 2021, 25);
-
 		Spa s4("BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25);
 		//Spa s4("BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25);
 		Spa infinitySpa;
@@ -107,6 +106,7 @@ int main() {
 
 
 		s1.wyswietl_rezerwacje(lista_rezerwacji_basen);
+		cout << s1.zwroc_dane_spa() << endl;
 
 	}
 	else
