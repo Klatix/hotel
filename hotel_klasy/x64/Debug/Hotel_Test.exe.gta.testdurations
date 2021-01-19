@@ -13,5 +13,8 @@
     <TestDuration Test="METHOD_TEST.TEST_KONSTRUKTOROW_KIEROWNIK" Duration="1" />
     <TestDuration Test="METHOD_TEST.TEST_KONSTRUKTOROW_KELNER" Duration="1" />
     <TestDuration Test="METHOD_TEST.TEST_USUN_REZERWACJE" Duration="1" />
+    <TestDuration Test="METHOD_TEST.TEST_MODYFIKACJA_REZERWACJI" Duration="1" />
+    <TestDuration Test="FUNCTION_TEST.TEST_REMOVE_VECTOR_CELL" Duration="1" />
+    <TestDuration Test="FUNCTION_TEST.TEST_ILOSC_DNI" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

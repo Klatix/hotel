@@ -223,6 +223,11 @@ struct Data {
 		cin >> minuta;
 	}
 };
+inline int ilosc_dni(int y, int m, int d) {
+	if (m < 3)
+		y--, m += 12;
+	return 365 * y + y / 4 - y / 100 + y / 400 + (153 * m - 457) / 5 + d - 306;
+}
 
 //funkcja porownojaca dwie daty, wykorzystywana przy sprawdzaniu dostepnosci przy rezerwacji pokoju
 //zwraca 1 jesli pierwsza data jest pozniejsza, zwraca 2 jesli druga data jest pozniejsza, zwraca 0 jesli sa rowne
@@ -296,7 +301,12 @@ public:
 	}
 
 };
-
+inline void remove(vector<Data>& vec, size_t pos)
+{
+	vector<Data>::iterator it = vec.begin();
+	advance(it, pos);
+	vec.erase(it);
+}
 class Rezerwacja_pokoju {
 private:
 	
@@ -323,12 +333,7 @@ public:
 	}
 
 	
-	void remove(vector<Data>& vec, size_t pos)
-	{
-		vector<Data>::iterator it = vec.begin();
-		advance(it, pos);
-		vec.erase(it);
-	}
+
 	void usun_rezerwacje(){
 		if (dokonano_rezerwacji != false) {
 			
@@ -338,8 +343,6 @@ public:
 					
 					remove(zarezerwowany_pokoj.lista_dostepnosci.poczatek, i);
 					remove(zarezerwowany_pokoj.lista_dostepnosci.koniec, i);
-					//zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.poczatek.begin() + i);
-					//zarezerwowany_pokoj.lista_dostepnosci.poczatek.erase(zarezerwowany_pokoj.lista_dostepnosci.koniec.begin() + i);
 					dokonano_rezerwacji = false;
 				}
 				
@@ -413,11 +416,33 @@ public:
 		zarezerwowany_pokoj.lista_dostepnosci.koniec.push_back(k);
 		dokonano_rezerwacji = true;
 	}
+	//metoda zwracajaca status rezerwacji, wykorzystana tylko dla Google Testów
 	bool get_dokonano_rezerwacji()
 	{
 		return dokonano_rezerwacji;
 	}
-	bool obsluga_platnosci() {}
+	
+	bool obsluga_platnosci() {
+
+
+		int dlugosc_pobytu = ilosc_dni(data_konca.rok, data_konca.miesiac, data_konca.dzien) - ilosc_dni(data_poczatku.rok, data_poczatku.miesiac, data_poczatku.dzien);
+
+		if (data_konca.dzien - data_poczatku.dzien)
+			cout << "Koszt wybranego pokoju wynosi " << zarezerwowany_pokoj.cena << " za dobe, twoj pobyt trwa " << dlugosc_pobytu << " dni." << endl;
+		cout << "Calkowity koszt wyniesie " << dlugosc_pobytu * zarezerwowany_pokoj.cena << " PLN" << endl;
+		cout << "Czy chcesz dokonac platnosci? " << endl << "[1] tak" << endl << "[2] nie" << endl;
+		int decyzja;
+		cin >> decyzja;
+		if (decyzja == 1) {
+			return true;
+		}
+		else
+		{
+			usun_rezerwacje();
+			return false;
+		}
+		
+	}
 
 };
 

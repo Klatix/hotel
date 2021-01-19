@@ -29,6 +29,27 @@ TEST(FUNCTION_TEST, TEST_CMP_DATA) {
 	EXPECT_EQ(cmp_date(d2, d1), 1);
 	EXPECT_EQ(cmp_date(d1, d3), 0);
 }
+TEST(FUNCTION_TEST, TEST_REMOVE_VECTOR_CELL) {
+	Dostepnosc_pokoju dostepnosc;
+	Data dp1(1, 2, 2021);
+	Data dp2(19, 2, 2021);
+	dostepnosc.poczatek.push_back(dp1);
+	dostepnosc.poczatek.push_back(dp2);
+
+	int size1 = dostepnosc.poczatek.size();
+	remove(dostepnosc.poczatek, 0);
+	EXPECT_EQ(dostepnosc.poczatek[0].dzien, 19);
+	int size2 = dostepnosc.poczatek.size();
+	EXPECT_LT(size2, size1);
+}
+TEST(FUNCTION_TEST, TEST_ILOSC_DNI) {
+	Data dp1(1, 2, 2021);
+	Data dp2(19, 2, 2021);
+	int val1 = ilosc_dni(dp1.rok, dp1.miesiac, dp1.dzien);
+	int val2 = ilosc_dni(dp2.rok, dp2.miesiac, dp2.dzien);
+	EXPECT_EQ(val2-val1, 18);
+	EXPECT_LT(val1, val2);
+}
 TEST(METHOD_TEST, TEST_SPRAWDZ_DOSTEPNOSC_POKOJU) {
 
 	Data dp1(19, 2, 2021);
@@ -93,4 +114,19 @@ TEST(METHOD_TEST, TEST_USUN_REZERWACJE) {
 	EXPECT_EQ(rez1.get_dokonano_rezerwacji(), false);
 	
 
+}
+
+TEST(METHOD_TEST, TEST_MODYFIKACJA_REZERWACJI) {
+	Rezerwacja_pokoju rez1;
+
+	Data dp2(19, 2, 2021);
+	Data dk2(23, 2, 2021);
+
+	rez1.usun_rezerwacje();
+	bool result1 = rez1.get_dokonano_rezerwacji();
+	rez1.potwierdz_modyfikacje(dp2, dk2);
+	bool result2 = rez1.get_dokonano_rezerwacji();
+	EXPECT_EQ(result1, false);
+	rez1.usun_rezerwacje();
+	EXPECT_EQ(result2, true);
 }

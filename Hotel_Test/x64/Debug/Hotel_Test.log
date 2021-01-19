@@ -1,2 +1,4 @@
 ﻿  test.cpp
+C:\Users\klata\Documents\GitHub\hotel\Hotel_Test\test.cpp(39,40): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\klata\Documents\GitHub\hotel\Hotel_Test\test.cpp(42,40): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
   Hotel_Test.vcxproj -> C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\Hotel_Test.exe

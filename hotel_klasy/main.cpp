@@ -15,13 +15,20 @@ int main() {
 	dostepnosc.koniec.push_back(dk3);
 
 	vector<Pokoj> lista_pokojow;
-	Pokoj pokoj1(1, 450, 3, dostepnosc);
+	Pokoj pokoj1(1, 289, 3, dostepnosc);
 	lista_pokojow.push_back(pokoj1);
 
 	//EXPECT_EQ(rez1.rezerwacja_pokoju(1, dp2, dk2, lista_pokojow), true);
 	//EXPECT_EQ(rez1.get_dokonano_rezerwacji(), true);
-	rez1.rezerwacja_pokoju(1, dp2, dk2, lista_pokojow);
-	rez1.usun_rezerwacje();
+	if (rez1.rezerwacja_pokoju(1, dp2, dk2, lista_pokojow) == true) {
+		if (rez1.obsluga_platnosci() == true) {
+			cout << "Platnosc przyjeta!" << endl;
+		}
+		else {
+			cout << "Platnosc odrzucona!" << endl;
+		}
+	}
+	//rez1.usun_rezerwacje();
 	//EXPECT_EQ(rez1.get_dokonano_rezerwacji(), false);
 
 
