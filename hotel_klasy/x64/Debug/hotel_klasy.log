@@ -1,4 +1,7 @@
-﻿  hotel_klasy.cpp
-C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\hotel_klasy.cpp(642,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\hotel_klasy.cpp(702,13): warning C4101: 's': unreferenced local variable
+﻿  main.cpp
+C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\hotel_klasy.cpp(576,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\hotel_klasy.cpp(636,13): warning C4101: 's': unreferenced local variable
+C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\main.cpp(78,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\main.cpp(186,11): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\hotel_klasy.cpp(569): warning C4715: 'Kuchnia::zwroc_info_o_posilku': not all control paths return a value
   hotel_klasy.vcxproj -> C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\x64\Debug\hotel_klasy.exe

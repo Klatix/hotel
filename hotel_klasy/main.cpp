@@ -1,5 +1,6 @@
 //#include <iostream>
 #include "hotel_klasy.cpp"
+
 int main() {
 	Rezerwacja_pokoju rez1;
 	Data dp1(1, 2, 2021);
@@ -32,17 +33,14 @@ int main() {
 	Spa b2("BASEN", klient1.zwroc_ID(), 12, 30, 14, 10, 2021, 55);
 	Spa b3("BASEN", klient1.zwroc_ID(), 13, 30, 18, 10, 2021, 25);
 	Spa b4("BASEN", klient1.zwroc_ID(), 17, 00, 22, 10, 2021, 25);
-
 	lista_rezerwacji_basen.push_back(b1);
 	lista_rezerwacji_basen.push_back(b2);
 	lista_rezerwacji_basen.push_back(b3);
 	lista_rezerwacji_basen.push_back(b4);
-
 	Spa s1("SAUNA", klient1.zwroc_ID(), 10, 30, 11, 12, 2021, 45);
 	Spa s2("SAUNA", klient1.zwroc_ID(), 12, 30, 14, 12, 2021, 55);
 	Spa s3("SAUNA", klient1.zwroc_ID(), 13, 30, 18, 12, 2021, 25);
 	Spa s4("SAUNA", klient1.zwroc_ID(), 17, 00, 22, 12, 2021, 25);
-
 	lista_rezerwacji_sauna.push_back(s1);
 	lista_rezerwacji_sauna.push_back(s2);
 	lista_rezerwacji_sauna.push_back(s3);
@@ -78,51 +76,70 @@ int main() {
 	///////////////////////////
 
 	srand(time(NULL));
-	cout << "Jestem:\nPracownikiem\t[1]\nKlientem\t[2]\nWybor: ";
+	cout << "Jestem:\nPracownikiem\t[1]\nKlientem\t[2]\nKelnerem\t[3]\nWybor: ";
 	int wybor;
 	cin >> wybor;
 	cout << endl;
 	if (wybor == 1)
 	{
+		int wybor = NULL;
 		string haslo;
+		
 		cout << "Podaj haslo: ";
 		cin >> haslo;
 		cout << endl;
 		if (haslo == "admin")
 		{
 			cout << "Podales poprawne haslo!" << endl;
-			//wybor co chce robic
+			while (wybor != 3)
+			{
+				cout << "Wybierz opcje:\nZarzadzanie zakwaterowaiem\t[1]\nZarzadzanie wykwaterowaiem\t[2]\nWyjscie\t\t\t\t[3]\nWybor:";
+				cin >> wybor;
+				cout << endl;
+			}
+			
 		}
 		else
 		{
 			cout << "Podales bledne haslo!" << endl;
 		}
+
+
 	}
 	else if (wybor == 2)
 	{
-		int wybor=NULL;
+		int wybor = NULL;
 		int wybor_spa = NULL;
 		Klient klient1;
 		Spa infinitySpa;
-		Obecny_pobyt_klienta test1;
-		while(wybor != 7)
+		Obecny_pobyt_klienta ob1;
+		Posilek p1;
+		Zamowienie z1;
+		Kuchnia k1;
+		Data d1;
+		Rezerwacja_pokoju r1;
+		r1.data_konca.dzien = 7;
+
+		while (wybor != 5)
 		{
-			cout << "Wybierz opcje:\nRezerwacja pokoju\t[1]\nModyfikacja rezerwacji\t[2]\nZakwaterowanie\t\t[3]\nWykwaterowanie\t\t[4]\nZamawianie jedzenia\t[5]\nSpa\t\t\t[6]\nWyjscie\t\t\t[7]\nWybor: ";
+			cout << "Wybierz opcje:\nRezerwacja pokoju\t[1]\nModyfikacja rezerwacji\t[2]\nZamawianie jedzenia\t[3]\nSpa\t\t\t[4]\nWyjscie\t\t\t[5]\nWybor: ";
 			cin >> wybor;
 			cout << endl;
-			switch(wybor)
+			switch (wybor)
 			{
 			case 1:
 				break;
 			case 2:
+
 				break;
 			case 3:
+
+				system("cls");
+				k1.zamow_jedzenie(z1, ob1);
+				system("cls");
+
 				break;
 			case 4:
-				break;
-			case 5:
-				break;
-			case 6:
 				wybor_spa = NULL;
 				cout << "Chce zarezerwowac:\nBasen\t[1]\nSaune\t[2]\nWybor: ";
 				cin >> wybor_spa;
@@ -136,11 +153,11 @@ int main() {
 					if (wybor_spa == 1)
 					{
 						infinitySpa.wyswietl_rezerwacje(lista_rezerwacji_basen);
-						
+
 					}
 					else if (wybor_spa == 2)
 					{
-						infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID(), "BASEN");
+						infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID(), "BASEN", ob1);
 						lista_rezerwacji_basen.push_back(infinitySpa);
 					}
 					cout << endl;
@@ -155,7 +172,7 @@ int main() {
 					}
 					else if (wybor_spa == 2)
 					{
-						infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID(), "SAUNA");
+						infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID(), "SAUNA", ob1);
 						lista_rezerwacji_sauna.push_back(infinitySpa);
 					}
 					cout << endl;
@@ -165,19 +182,18 @@ int main() {
 					break;
 				}
 				break;
-			case 7:
-				wybor == 7;
+			case 5:
+				wybor == 5;
 				break;
 			default:
 				cout << "Blad! Wybierz ponownie!" << endl;
 			}
 
-			Klient klient1;
 			//klient1.wprowadz_dane();
 			//klient1.wypisz_uzytkownika();
 
 
-			
+
 			//Spa s4("BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25);
 
 			//s4.dodaj_rezerwacje(&lista_rezerwacji_basen, "BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25)
@@ -193,9 +209,13 @@ int main() {
 			//cout << s1.zwroc_dane_spa() << endl;
 		}
 	}
+	else if (wybor == 3)
+	{
+		//tu kelner
+	}
 	else
 	{
 		cout << "BLAD!" << endl;
 	}
-	
+
 }
