@@ -1,7 +1,11 @@
 ﻿  hotel_klasy.cpp
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(553,38): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(560,38): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(629,30): warning C4834: odrzucanie zwracanej wartości funkcji z atrybutem „nodiscard”
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(675,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(735,13): warning C4101: "s": lokalna zmienna, do której nie istnieje odwołanie
-  hotel_klasy.vcxproj -> C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\hotel_klasy.exe
+C:\GIT\hotel\hotel_klasy\hotel_klasy.cpp(645,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\GIT\hotel\hotel_klasy\hotel_klasy.cpp(705,13): warning C4101: 's': unreferenced local variable
+  main.cpp
+C:\GIT\hotel\hotel_klasy\hotel_klasy.cpp(645,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\GIT\hotel\hotel_klasy\hotel_klasy.cpp(705,13): warning C4101: 's': unreferenced local variable
+C:\GIT\hotel\hotel_klasy\main.cpp(81,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\GIT\hotel\hotel_klasy\main.cpp(204,11): warning C4553: '==': result of expression not used; did you intend '='?
+  Generating Code...
+C:\GIT\hotel\hotel_klasy\hotel_klasy.cpp(638): warning C4715: 'Kuchnia::zwroc_info_o_posilku': not all control paths return a value
+  hotel_klasy.vcxproj -> C:\GIT\hotel\hotel_klasy\x64\Debug\hotel_klasy.exe

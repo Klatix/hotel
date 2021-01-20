@@ -61,7 +61,7 @@ struct Data {
 
 		if (dzien > 0 && dzien < 31 && miesiac > 0 && miesiac < 13 && rok > 2020)
 		{
-				//cout << "Data zostala zapisana!" << endl;
+			//cout << "Data zostala zapisana!" << endl;
 		}
 		else {
 			cout << "BLEDNIE WPROWADZONA DATA!" << endl;
@@ -81,7 +81,7 @@ struct Data {
 
 		if (dzien > 0 && dzien < 31 && miesiac > 0 && miesiac < 13 && rok > 2020 && godzina >= 0 && godzina < 25 && minuta >= 0 && minuta < 65)
 		{
-				//cout << "Data zostala zapisana!" << endl;
+			//cout << "Data zostala zapisana!" << endl;
 		}
 		else {
 			cout << "BLEDNIE WPROWADZONA DATA!" << endl;
@@ -105,9 +105,9 @@ struct Rezerwacja_spa
 class Spa :public Rezerwacja_spa {
 	Rezerwacja_spa lista;
 public:
-		Spa() {}
+	Spa() {}
 
-		Spa(string u, int id, int g, int m, int d, int mth, int y, int ile)
+	Spa(string u, int id, int g, int m, int d, int mth, int y, int ile)
 	{
 		usluga = u;
 		numer_ID = id;
@@ -409,10 +409,13 @@ public:
 		data.wpisz_date_ogolna();
 
 		if (cmp_date(rezerwacja.data_konca, data) == 1) {
+
 			nalicz_kare(rezerwacja, data);
+			cout << endl << "Data zostala przekroczona." << endl;
 			return true;
+
 		}
-		else return false;
+		else cout << endl << "Data nie zostala przekroczona." << endl; return false;
 
 		
 	};
@@ -420,7 +423,7 @@ public:
 	inline void nalicz_kare(Rezerwacja_pokoju& rezerwacja, Data& data) {
 
 		cout << "Przekroczono date pobytu, do rachunku zostanie naliczona kara." << endl;
-		cout << "Saldo rezerwacji przed naliczeniem kary: " << saldo << " zl." << endl;
+		cout << "Saldo rachunku przed naliczeniem kary: " << saldo << " zl." << endl;
 
 		int kara = 25;
 		int dlugosc_bezprawnego_pobytu = ilosc_dni(data.rok,data.miesiac, data.dzien) - ilosc_dni(rezerwacja.data_konca.rok, rezerwacja.data_konca.miesiac, rezerwacja.data_konca.dzien);
@@ -457,6 +460,7 @@ public:
 				saldo = 0;
 				cout << "Dziekujemy i zyczymy milego dnia!" << endl;
 				return;
+
 
 			}
 
