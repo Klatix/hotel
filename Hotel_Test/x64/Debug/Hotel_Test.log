@@ -1,4 +1,7 @@
 ﻿  test.cpp
-C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\Hotel_Test\test.cpp(39,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\Hotel_Test\test.cpp(42,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Hotel_Test.vcxproj -> C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\x64\Debug\Hotel_Test.exe
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(603,30): warning C4834: odrzucanie zwracanej wartości funkcji z atrybutem „nodiscard”
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(649,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(709,13): warning C4101: "s": lokalna zmienna, do której nie istnieje odwołanie
+C:\Users\klata\Documents\GitHub\hotel\Hotel_Test\test.cpp(39,40): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\klata\Documents\GitHub\hotel\Hotel_Test\test.cpp(42,40): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+  Hotel_Test.vcxproj -> C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\Hotel_Test.exe

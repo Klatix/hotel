@@ -122,7 +122,7 @@ TEST(METHOD_TEST, TEST_MODYFIKACJA_REZERWACJI) {
 	Data dp2(19, 2, 2021);
 	Data dk2(23, 2, 2021);
 
-	rez1.usun_rezerwacje();
+	//rez1.usun_rezerwacje();
 	bool result1 = rez1.get_dokonano_rezerwacji();
 	rez1.potwierdz_modyfikacje(dp2, dk2);
 	bool result2 = rez1.get_dokonano_rezerwacji();
