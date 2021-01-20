@@ -12,5 +12,9 @@
     <TestDuration Test="FUNCTION_TEST.TEST_REMOVE_VECTOR_CELL" Duration="1" />
     <TestDuration Test="FUNCTION_TEST.TEST_ILOSC_DNI" Duration="1" />
     <TestDuration Test="METHOD_TEST.TEST_KONSTRUKTOR_SPA" Duration="1" />
+    <TestDuration Test="METHOD_TEST.TEST_DODAJ_DO_KOSZYKA" Duration="1" />
+    <TestDuration Test="METHOD_TEST.TEST_DODAJ_DO_LISTY" Duration="1" />
+    <TestDuration Test="METHOD_TEST.TEST_NALICZ_KARE" Duration="1" />
+    <TestDuration Test="METHOD_TEST.TEST_SPRAWDZ_STAN_RACHUNKU" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

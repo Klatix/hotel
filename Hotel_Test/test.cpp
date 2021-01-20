@@ -88,7 +88,7 @@ TEST(METHOD_TEST, TEST_SPRAWDZ_DOSTEPNOSC_POKOJU) {
 	EXPECT_EQ(pokoj1.sprawdz_dostepnosc(dp8, dk8), false);
 
 }
-
+/*
 TEST(METHOD_TEST, TEST_USUN_REZERWACJE) {
 	Rezerwacja_pokoju rez1;
 	Data dp1(1, 2, 2021);
@@ -115,7 +115,7 @@ TEST(METHOD_TEST, TEST_USUN_REZERWACJE) {
 
 
 }
-
+*/
 TEST(METHOD_TEST, TEST_MODYFIKACJA_REZERWACJI) {
 	Rezerwacja_pokoju rez1;
 
@@ -136,3 +136,49 @@ TEST(METHOD_TEST, TEST_KONSTRUKTOR_SPA) {
 
 	EXPECT_EQ("BASEN 1111 18:30 14.10.2021 na: 45 minut", s_test.zwroc_dane_spa());
 }
+
+
+TEST(METHOD_TEST, TEST_DODAJ_DO_KOSZYKA) {
+	Zamowienie z_test;
+	Posilek p1;
+	z_test.dodaj_do_koszyka(z_test.koszyk, p1);
+	EXPECT_EQ(z_test.koszyk.size(), 1);
+
+}
+
+TEST(METHOD_TEST, TEST_DODAJ_DO_LISTY) {
+	Zamowienie z1;
+	Kuchnia k1;
+
+	dodaj_do_listy(k1.lista_zamowien, z1);
+	EXPECT_EQ(k1.lista_zamowien.size(), 1);
+
+}
+
+
+TEST(METHOD_TEST, TEST_NALICZ_KARE) {
+	Obecny_pobyt_klienta ob1;
+
+	Data dp(14, 2, 2021);
+	Data dk(17, 2, 2021);
+	Rezerwacja_pokoju r1 = { dp, dk, Pokoj(3, 50, 5), false };
+
+	//Data d1;
+	Data d1(20, 2, 2021);
+
+	ob1.nalicz_kare(r1, d1);
+
+	EXPECT_EQ(ob1.saldo, 75);
+
+}
+
+TEST(METHOD_TEST, TEST_SPRAWDZ_STAN_RACHUNKU) {
+	Obecny_pobyt_klienta ob1;
+
+	ob1.saldo = 50;
+
+	EXPECT_EQ(ob1.sprawdz_stan_rachunku(), 50);
+
+}
+
+

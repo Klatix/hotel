@@ -95,76 +95,6 @@ struct Data {
 };
 
 
-struct Rezerwacja_spa
-{
-	Data data;
-	string usluga;
-	int numer_ID, na_ile; // na_ile w minutach
-};
-
-class Spa :public Rezerwacja_spa {
-	Rezerwacja_spa lista;
-public:
-		Spa() {}
-
-		Spa(string u, int id, int g, int m, int d, int mth, int y, int ile)
-	{
-		usluga = u;
-		numer_ID = id;
-		data.godzina = g;
-		data.minuta = m;
-		data.dzien = d;
-		data.miesiac = mth;
-		data.rok = y;
-		na_ile = ile;
-	}
-
-	string zwroc_dane_spa()
-	{
-		return usluga + " " + to_string(numer_ID) + " " + to_string(data.godzina) + ":" + to_string(data.minuta) + " " + to_string(data.dzien) + "." + to_string(data.miesiac) + "." + to_string(data.rok) + " na: " + to_string(na_ile) + " minut";
-	}
-
-	void wyswietl_rezerwacje(vector<Spa> lista)
-	{
-		cout << "Zajete terminy: " << endl;
-		for (int i = 0; i < lista.size(); i++)
-		{
-			cout << "Od " << lista[i].data.godzina << ":" << lista[i].data.minuta << " " << lista[i].data.dzien << "." << lista[i].data.miesiac << "." << lista[i].data.rok << " do ";
-			if (lista[i].data.minuta + lista[i].na_ile >= 60)
-			{
-				lista[i].data.godzina = lista[i].data.godzina + 1;
-				lista[i].data.minuta = lista[i].data.minuta + lista[i].na_ile - 60;
-				cout << lista[i].data.godzina << ":" << lista[i].data.minuta << " " << lista[i].data.dzien << "." << lista[i].data.miesiac << "." << lista[i].data.rok << endl;
-			}
-			else {
-				cout << lista[i].data.godzina << ":" << lista[i].data.minuta + lista[i].na_ile << " " << lista[i].data.dzien << "." << lista[i].data.miesiac << "." << lista[i].data.rok << endl;
-			}
-		}
-	}
-
-	void dodaj_rezerwacje(int id, string u)
-	{
-		cout << "Podaj date na ktora chcesz zarezerwowac miejsce" << endl;
-		data.wpisz_date_szczegolowa();
-		usluga = u;
-		cout << "\nPodaj na ile chcesz dokonac rezerwacji (w minutach): ";
-		cin >> na_ile;
-
-		int wybor;
-		cout << "Aby potwierdzic rezerwacje wybierz '1', aby zmodyfikowac wybierz '2': ";
-		cin >> wybor;
-		if (wybor == 1)
-		{
-			cout << "\nTwoja rezerwacja zostala zapisana!" << endl;
-		}
-		else if (wybor == 2)
-		{
-			dodaj_rezerwacje(id, u);
-		}
-	}
-
-};
-
 inline int ilosc_dni(int y, int m, int d) {
 	if (m < 3)
 		y--, m += 12;
@@ -286,12 +216,12 @@ public:
 
 					remove(zarezerwowany_pokoj.lista_dostepnosci.poczatek, i);
 					remove(zarezerwowany_pokoj.lista_dostepnosci.koniec, i);
-					dokonano_rezerwacji = false;
+					
 				}
 
 
 			}
-
+			dokonano_rezerwacji = false;
 			//remove(zarezerwowany_pokoj.lista_dostepnosci.poczatek.begin(), zarezerwowany_pokoj.lista_dostepnosci.poczatek.end(), data_poczatku);
 			//remove(zarezerwowany_pokoj.lista_dostepnosci.koniec.begin(), zarezerwowany_pokoj.lista_dostepnosci.koniec.end(), data_konca);
 		}
@@ -313,7 +243,7 @@ public:
 	}
 	void zmien_date() {
 		Data n_data_p, n_data_k;
-		cout << "Twoja obecna data rezerwacji: " << data_poczatku.dzien << "." << data_konca.miesiac << "." << data_konca.rok << endl;
+		cout << "Twoja obecna data rezerwacji: " << data_poczatku.dzien << "." << data_poczatku.miesiac << "." << data_poczatku.rok << " do " << data_konca.dzien << "." << data_konca.miesiac << "." << data_konca.rok << endl;
 		cout << "Wprowadz nowa date:" << endl;
 		cout << "Poczatek: ";
 		n_data_p.wpisz_date_ogolna();
@@ -335,9 +265,11 @@ public:
 			}
 			*/
 			cout << "Rezerwacja potwierdzona" << endl;
+			
 			data_poczatku = p;
 			data_konca = k;
 			zarezerwowany_pokoj = lista_pokojow[nr - 1];
+			obsluga_platnosci();
 			zarezerwowany_pokoj.lista_dostepnosci.poczatek.push_back(p);
 			zarezerwowany_pokoj.lista_dostepnosci.koniec.push_back(k);
 			dokonano_rezerwacji = true;
@@ -346,7 +278,7 @@ public:
 		else {
 			return false;
 		}
-
+		
 	}
 	void potwierdz_modyfikacje(Data p, Data k) {
 		data_poczatku = p;
@@ -370,7 +302,7 @@ public:
 		if (data_konca.dzien - data_poczatku.dzien)
 			cout << "Koszt wybranego pokoju wynosi " << zarezerwowany_pokoj.cena << " za dobe, twoj pobyt trwa " << dlugosc_pobytu << " dni." << endl;
 		cout << "Calkowity koszt wyniesie " << dlugosc_pobytu * zarezerwowany_pokoj.cena << " PLN" << endl;
-		cout << "Teraz pobrana zostanie połowa kwoty, czyli " << (dlugosc_pobytu * zarezerwowany_pokoj.cena)/2 << " PLN, druga połowa płatna przy wykwaterowaniu." << endl;
+		cout << "Teraz pobrana zostanie polowa kwoty, czyli " << (dlugosc_pobytu * zarezerwowany_pokoj.cena)/2 << " PLN, druga polowa platna przy wykwaterowaniu." << endl;
 		cout << "Czy chcesz dokonac platnosci? " << endl << "[1] tak" << endl << "[2] nie" << endl;
 		int decyzja;
 		cin >> decyzja;
@@ -408,7 +340,7 @@ public:
 		Data data;
 		data.wpisz_date_ogolna();
 
-		if (cmp_date(rezerwacja.data_konca, data) == 1) {
+		if (cmp_date(rezerwacja.data_konca, data) == 2) {
 			nalicz_kare(rezerwacja, data);
 			return true;
 		}
@@ -480,9 +412,10 @@ private:
 	int ID;
 	bool zakwaterowany=false;
 	Obecny_pobyt_klienta pobyt;
-	Rezerwacja_pokoju rezerwacja;
 	string email;
 public:
+	Rezerwacja_pokoju rezerwacja;
+
 	string zwroc_dane() {
 		string dane_klienta = imie + " " + nazwisko;
 		return dane_klienta;
@@ -585,7 +518,7 @@ public:
 	int nr_zamowienia = 0;
 	vector <Posilek> koszyk;
 
-	void potwierdz_zamowienie(vector <Zamowienie> lista_zamowien, Zamowienie& zamowienie, Obecny_pobyt_klienta& ob);  //metoda potweirdzenia zamowienia 
+	void potwierdz_zamowienie(vector <Zamowienie> &lista_zamowien, Zamowienie& zamowienie, Obecny_pobyt_klienta& ob);  //metoda potweirdzenia zamowienia 
 	void dodaj_do_koszyka(vector <Posilek>& koszyk, Posilek posilek);
 
 
@@ -603,7 +536,7 @@ public:
 
 	void wyswietl_menu();
 	void zamow_jedzenie(Zamowienie z, Obecny_pobyt_klienta& ob);
-	void dodaj_do_listy(vector <Zamowienie> lista_zamowien, Zamowienie zamowienie);
+	void dodaj_do_listy(vector <Zamowienie> &lista_zamowien, Zamowienie &zamowienie);
 	Posilek zwroc_info_o_posilku(int nr); //metoda zwracajaca informacje o posilku - nazwa, cena ?? NUMER
 
 };
@@ -647,7 +580,7 @@ inline void Zamowienie::dodaj_do_koszyka(vector <Posilek>& koszyk, Posilek posil
 }
 
 //funckja dodajaca zamowienie do listy 
-inline void dodaj_do_listy(vector <Zamowienie> lista_zamowien, Zamowienie& zamowienie) {
+inline void dodaj_do_listy(vector <Zamowienie> &lista_zamowien, Zamowienie& zamowienie) {
 
 	lista_zamowien.push_back(zamowienie);
 
@@ -667,7 +600,7 @@ inline Posilek Kuchnia::zwroc_info_o_posilku(int nr) {
 
 }
 //metoda klasy Zamowienie generujaca numer zamowienia 
-inline void Zamowienie::potwierdz_zamowienie(vector <Zamowienie> lista_zamowien, Zamowienie& zamowienie, Obecny_pobyt_klienta& ob) {
+inline void Zamowienie::potwierdz_zamowienie(vector <Zamowienie> &lista_zamowien, Zamowienie& zamowienie, Obecny_pobyt_klienta& ob) {
 
 
 
@@ -795,3 +728,75 @@ inline void Kuchnia::zamow_jedzenie(Zamowienie z1, Obecny_pobyt_klienta& ob) {
 	}
 	return;
 }
+struct Rezerwacja_spa
+{
+	Data data;
+	string usluga;
+	int numer_ID, na_ile; // na_ile w minutach
+};
+
+class Spa :public Rezerwacja_spa {
+	Rezerwacja_spa lista;
+public:
+	float stawka = 2;
+
+	Spa() {}
+
+	Spa(string u, int id, int g, int m, int d, int mth, int y, int ile)
+	{
+		usluga = u;
+		numer_ID = id;
+		data.godzina = g;
+		data.minuta = m;
+		data.dzien = d;
+		data.miesiac = mth;
+		data.rok = y;
+		na_ile = ile;
+	}
+
+	string zwroc_dane_spa()
+	{
+		return usluga + " " + to_string(numer_ID) + " " + to_string(data.godzina) + ":" + to_string(data.minuta) + " " + to_string(data.dzien) + "." + to_string(data.miesiac) + "." + to_string(data.rok) + " na: " + to_string(na_ile) + " minut";
+	}
+
+	void wyswietl_rezerwacje(vector<Spa> lista)
+	{
+		cout << "Zajete terminy: " << endl;
+		for (int i = 0; i < lista.size(); i++)
+		{
+			cout << "Od " << lista[i].data.godzina << ":" << lista[i].data.minuta << " " << lista[i].data.dzien << "." << lista[i].data.miesiac << "." << lista[i].data.rok << " do ";
+			if (lista[i].data.minuta + lista[i].na_ile >= 60)
+			{
+				lista[i].data.godzina = lista[i].data.godzina + 1;
+				lista[i].data.minuta = lista[i].data.minuta + lista[i].na_ile - 60;
+				cout << lista[i].data.godzina << ":" << lista[i].data.minuta << " " << lista[i].data.dzien << "." << lista[i].data.miesiac << "." << lista[i].data.rok << endl;
+			}
+			else {
+				cout << lista[i].data.godzina << ":" << lista[i].data.minuta + lista[i].na_ile << " " << lista[i].data.dzien << "." << lista[i].data.miesiac << "." << lista[i].data.rok << endl;
+			}
+		}
+	}
+
+	void dodaj_rezerwacje(int id, string u, Obecny_pobyt_klienta& opk)
+	{
+		cout << "Podaj date na ktora chcesz zarezerwowac miejsce" << endl;
+		data.wpisz_date_szczegolowa();
+		usluga = u;
+		cout << "\nPodaj na ile chcesz dokonac rezerwacji (w minutach): ";
+		cin >> na_ile;
+
+		int wybor;
+		cout << "Aby potwierdzic rezerwacje wybierz '1', aby zmodyfikowac wybierz '2': ";
+		cin >> wybor;
+		if (wybor == 1)
+		{
+			opk.saldo = stawka * na_ile;
+			cout << "\nTwoja rezerwacja zostala zapisana!" << endl;
+		}
+		else if (wybor == 2)
+		{
+			dodaj_rezerwacje(id, u, opk);
+		}
+	}
+
+};

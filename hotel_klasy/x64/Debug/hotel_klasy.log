@@ -1,7 +1,7 @@
 ﻿  hotel_klasy.cpp
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(553,38): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(560,38): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(629,30): warning C4834: odrzucanie zwracanej wartości funkcji z atrybutem „nodiscard”
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(675,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(735,13): warning C4101: "s": lokalna zmienna, do której nie istnieje odwołanie
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(486,38): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(493,38): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(562,30): warning C4834: odrzucanie zwracanej wartości funkcji z atrybutem „nodiscard”
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(608,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(668,13): warning C4101: "s": lokalna zmienna, do której nie istnieje odwołanie
   hotel_klasy.vcxproj -> C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\hotel_klasy.exe
