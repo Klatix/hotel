@@ -27,6 +27,27 @@ int main() {
 
 	vector<Spa> lista_rezerwacji_basen;
 	vector<Spa> lista_rezerwacji_sauna;
+	/*
+	Spa b1("BASEN", klient1.zwroc_ID(), 10, 30, 11, 10, 2021, 45);
+	Spa b2("BASEN", klient1.zwroc_ID(), 12, 30, 14, 10, 2021, 55);
+	Spa b3("BASEN", klient1.zwroc_ID(), 13, 30, 18, 10, 2021, 25);
+	Spa b4("BASEN", klient1.zwroc_ID(), 17, 00, 22, 10, 2021, 25);
+
+	lista_rezerwacji_basen.push_back(b1);
+	lista_rezerwacji_basen.push_back(b2);
+	lista_rezerwacji_basen.push_back(b3);
+	lista_rezerwacji_basen.push_back(b4);
+
+	Spa s1("SAUNA", klient1.zwroc_ID(), 10, 30, 11, 12, 2021, 45);
+	Spa s2("SAUNA", klient1.zwroc_ID(), 12, 30, 14, 12, 2021, 55);
+	Spa s3("SAUNA", klient1.zwroc_ID(), 13, 30, 18, 12, 2021, 25);
+	Spa s4("SAUNA", klient1.zwroc_ID(), 17, 00, 22, 12, 2021, 25);
+
+	lista_rezerwacji_sauna.push_back(s1);
+	lista_rezerwacji_sauna.push_back(s2);
+	lista_rezerwacji_sauna.push_back(s3);
+	lista_rezerwacji_sauna.push_back(s4);
+	*/
 
 	////////////////////
 	//DATA BANK
@@ -79,35 +100,98 @@ int main() {
 	}
 	else if (wybor == 2)
 	{
+		int wybor=NULL;
+		int wybor_spa = NULL;
 		Klient klient1;
-		//klient1.wprowadz_dane();
-		//klient1.wypisz_uzytkownika();
-
-
-		Spa s1("BASEN", klient1.zwroc_ID(), 18, 30, 14, 10, 2021, 45);
-		Spa s2("BASEN", klient1.zwroc_ID(), 15, 30, 14, 10, 2021, 55);
-		Spa s3("BASEN", klient1.zwroc_ID(), 13, 30, 14, 10, 2021, 25);
-		Spa s4("BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25);
-		//Spa s4("BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25);
 		Spa infinitySpa;
+		Obecny_pobyt_klienta test1;
+		while(wybor != 7)
+		{
+			cout << "Wybierz opcje:\nRezerwacja pokoju\t[1]\nModyfikacja rezerwacji\t[2]\nZakwaterowanie\t\t[3]\nWykwaterowanie\t\t[4]\nZamawianie jedzenia\t[5]\nSpa\t\t\t[6]\nWyjscie\t\t\t[7]\nWybor: ";
+			cin >> wybor;
+			cout << endl;
+			switch(wybor)
+			{
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
+				wybor_spa = NULL;
+				cout << "Chce zarezerwowac:\nBasen\t[1]\nSaune\t[2]\nWybor: ";
+				cin >> wybor_spa;
+				cout << endl;
+				switch (wybor_spa)
+				{
+				case 1:
+					cout << "\nWyswietl aktualne rezerwacje\t[1]\nDodaj rezerwacje\t\t[2]\nWybor: ";
+					cin >> wybor_spa;
+					cout << endl;
+					if (wybor_spa == 1)
+					{
+						infinitySpa.wyswietl_rezerwacje(lista_rezerwacji_basen);
+						
+					}
+					else if (wybor_spa == 2)
+					{
+						infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID(), "BASEN");
+						lista_rezerwacji_basen.push_back(infinitySpa);
+					}
+					cout << endl;
+					break;
+				case 2:
+					cout << "\nWyswietl aktualne rezerwacje\t[1]\nDodaj rezerwacje\t\t[2]\nWybor: ";
+					cin >> wybor_spa;
+					cout << endl;
+					if (wybor_spa == 1)
+					{
+						infinitySpa.wyswietl_rezerwacje(lista_rezerwacji_sauna);
+					}
+					else if (wybor_spa == 2)
+					{
+						infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID(), "SAUNA");
+						lista_rezerwacji_sauna.push_back(infinitySpa);
+					}
+					cout << endl;
+					break;
+				default:
+					cout << "Bledna wartosc!" << endl;
+					break;
+				}
+				break;
+			case 7:
+				wybor == 7;
+				break;
+			default:
+				cout << "Blad! Wybierz ponownie!" << endl;
+			}
 
-		lista_rezerwacji_basen.push_back(s1);
-		lista_rezerwacji_basen.push_back(s2);
-		lista_rezerwacji_basen.push_back(s3);
-
-		lista_rezerwacji_basen.push_back(s4);
-		//s4.dodaj_rezerwacje(&lista_rezerwacji_basen, "BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25)
-
-		//lista_rezerwacji_basen.push_back(s4);
-		//s4.dodaj_rezerwacje(&lista_rezerwacji_basen, "BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25)
-		infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID());
-		lista_rezerwacji_basen.push_back(infinitySpa);
+			Klient klient1;
+			//klient1.wprowadz_dane();
+			//klient1.wypisz_uzytkownika();
 
 
+			
+			//Spa s4("BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25);
 
-		s1.wyswietl_rezerwacje(lista_rezerwacji_basen);
-		cout << s1.zwroc_dane_spa() << endl;
+			//s4.dodaj_rezerwacje(&lista_rezerwacji_basen, "BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25)
 
+			//lista_rezerwacji_basen.push_back(s4);
+			//s4.dodaj_rezerwacje(&lista_rezerwacji_basen, "BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25)
+			//infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID());
+			//lista_rezerwacji_basen.push_back(infinitySpa);
+
+
+
+			//s1.wyswietl_rezerwacje(lista_rezerwacji_basen);
+			//cout << s1.zwroc_dane_spa() << endl;
+		}
 	}
 	else
 	{

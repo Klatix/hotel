@@ -1,8 +1,10 @@
 ﻿#include <iostream>
 #include <time.h>
-#include "header.h"
+//#include "header.h"
 #include <vector>
 #include <string>
+#include <cstdlib>
+#pragma once
 using namespace std;
 //klasa abstrakcyjna z której dziedziczyć będą klasy Kelner, Klient i Kierownik
 class User {
@@ -18,7 +20,7 @@ public:
 	virtual string zwroc_dane() = 0;
 };
 
-
+class Obecny_pobyt_klienta;
 
 struct Data {
 
@@ -130,6 +132,8 @@ public:
 	}
 };
 
+
+
 class Kierownik :public User {
 public:
 	string zwroc_dane() {
@@ -172,9 +176,9 @@ public:
 	void zmiana_statusu_zamowienia(int nr_zamowienia, string nowy_status) {
 
 	}
-	void odbierz_zamowienie(Zamowienie zamowienie) {
+	//void odbierz_zamowienie(Zamowienie zamowienie) {
 
-	}
+	//}
 };
 
 struct Rezerwacja_spa
@@ -224,15 +228,25 @@ public:
 		}
 	}
 
-	void dodaj_rezerwacje(int id)
+	void dodaj_rezerwacje(int id, string u)
 	{
 		cout << "Podaj date na ktora chcesz zarezerwowac miejsce" << endl;
 		data.wpisz_date_szczegolowa();
-		cout << "Podaj rodzaj uslugi (BASEN/SAUNA): ";
-		cin >> usluga;
-		cout << "Podaj na ile chcesz dokonac rezerwacji (w minutach): ";
+		usluga = u;
+		cout << "\nPodaj na ile chcesz dokonac rezerwacji (w minutach): ";
 		cin >> na_ile;
-		cout << "\nTwoja rezerwacja zostala zapisana!" << endl;
+
+		int wybor;
+		cout << "Aby potwierdzic rezerwacje wybierz '1', aby zmodyfikowac wybierz '2': ";
+		cin >> wybor;
+		if (wybor == 1)
+		{
+			cout << "\nTwoja rezerwacja zostala zapisana!" << endl;
+		}
+		else if (wybor == 2)
+		{
+			dodaj_rezerwacje(id, u);
+		}
 	}
 
 };
@@ -324,13 +338,12 @@ inline void remove(vector<Data>& vec, size_t pos)
 }
 
 class Rezerwacja_pokoju {
-private:
+public:
 
 	Data data_poczatku;
 	Data data_konca;
 	Pokoj zarezerwowany_pokoj;
 	bool dokonano_rezerwacji = false;
-public:
 
 	void wybierz_pokoj(vector<Pokoj> lista_pokojow)
 	{
@@ -458,3 +471,294 @@ public:
 	}
 
 };
+
+class Obecny_pobyt_klienta {
+
+public:
+	float saldo = 0;
+
+	inline void rozpocznij_pobyt(Rezerwacja_pokoju& rezerwacja) {
+
+
+		saldo = saldo + 25 * (rezerwacja.data_konca.dzien - rezerwacja.data_poczatku.dzien);
+
+	};
+
+	inline bool sprawdz_czy_przekroczono_termin(Rezerwacja_pokoju& rezerwacja, Data& data) {
+
+
+		cout << "Wpisz date." << endl;
+		cout << "Godzina (bez minut):";
+		cin >> data.godzina;
+		cout << "Minuty: ";
+		cin >> data.minuta;
+		cout << "Dzien: ";
+		cin >> data.dzien;
+		cout << "Miesiac: ";
+		cin >> data.miesiac;
+		cout << "Rok";
+		cin >> data.rok;
+
+		if (cmp_date(rezerwacja.data_konca, data) == 1) {
+			return true;
+		}
+		else return false;
+
+
+	};
+
+	inline void nalicz_kare(Rezerwacja_pokoju& rezerwacja, Data& data) {
+
+		cout << "Przekroczono date pobytu, do rachunku zostanie naliczona kara." << endl;
+		cout << "Saldo rezerwacji przed naliczeniem kary: " << saldo << " zl." << endl;
+
+		int kara = 25;
+		saldo += (data.dzien - rezerwacja.data_konca.dzien) * kara;
+
+		cout << "Saldo rachunku po naliczeniu kary (koncowa kwota do zaplaty): " << saldo << " zl." << endl;
+
+
+	};
+
+	inline float sprawdz_stan_rachunku() {
+
+		cout << "Saldo rachunku wynosi: " << saldo << " zl." << endl;
+
+		return saldo;
+	};
+
+	inline void oplac_naleznosc() {
+		int kwota;
+		cout << endl << "Witamy w funkcji oplaty za pobyt!" << endl;
+		cout << "Naleznosc za pobyt wynosi: " << saldo << " zl. " << endl;
+
+		for (; ;) {
+			cout << "Wpisz kwote jaka wplacasz: ";
+			cin >> kwota;
+
+			if (kwota < saldo) {
+				cout << "Wplacona kwota jest za mala. " << endl;
+
+			}
+
+			else if (kwota > saldo) {
+				cout << "Wplacona kwota jest wyzsza od naleznosci. Zwracamy reszte w wysokosci " << kwota - saldo << " zl." << endl;
+				cout << "Dziekujemy i zyczymy milego dnia!" << endl;
+				return;
+
+			}
+
+			else if (kwota == saldo) {
+
+				cout << "Dziekujemy za wplate. Zyczymy milego dnia! " << endl;
+				return;
+
+			}
+		}
+
+
+
+	};
+
+};
+
+struct Posilek {
+
+	int nr_posilku = 0;
+	string nazwa_posilku = "brak nazwy";
+	float cena = 0.0;
+
+};
+
+
+
+
+
+class Zamowienie {
+public:
+
+	string status = "W trakcie";
+	int nr_pokoju = 0;
+	int nr_zamowienia = 0;
+	vector <Posilek> koszyk;
+
+	void potwierdz_zamowienie(vector <Zamowienie> lista_zamowien, Zamowienie& zamowienie, Obecny_pobyt_klienta& ob);  //metoda potweirdzenia zamowienia 
+	void dodaj_do_koszyka(vector <Posilek>& koszyk, Posilek posilek);
+
+
+};
+
+
+
+
+class Kuchnia {
+public:
+
+	Posilek menu[5] = { {1, "Zupa pomidorowa", 10.0}, {2, "Nalesniki z serem", 15.0}, {3, "Salatka grecka", 17.0}, {4, "Ziemniaczki w mundurkach", 12.0}, {5, "Fasola po bretonsku", 20.0} };
+	vector <Zamowienie> lista_zamowien;
+
+
+	void wyswietl_menu();
+	void zamow_jedzenie(Zamowienie z, Obecny_pobyt_klienta& ob);
+	void dodaj_do_listy(vector <Zamowienie> lista_zamowien, Zamowienie zamowienie);
+	Posilek zwroc_info_o_posilku(int nr); //metoda zwracajaca informacje o posilku - nazwa, cena ?? NUMER
+
+};
+
+
+//funkcja dodajcac posilek do zamowienia 
+inline void Zamowienie::dodaj_do_koszyka(vector <Posilek>& koszyk, Posilek posilek) {
+
+	koszyk.push_back(posilek);
+
+}
+
+//funckja dodajaca zamowienie do listy 
+inline void dodaj_do_listy(vector <Zamowienie> lista_zamowien, Zamowienie& zamowienie) {
+
+	lista_zamowien.push_back(zamowienie);
+
+}
+
+
+//metoda klasy Posilek zwracajaca informacje o posilku - dodatkowo NUMER
+inline Posilek Kuchnia::zwroc_info_o_posilku(int nr) {
+	int i = 1;
+	while (i <= 5) {
+		if (nr == menu[i - 1].nr_posilku) {
+
+			return menu[i - 1];
+		}
+		else i++;
+	}
+
+}
+//metoda klasy Zamowienie generujaca numer zamowienia 
+inline void Zamowienie::potwierdz_zamowienie(vector <Zamowienie> lista_zamowien, Zamowienie& zamowienie, Obecny_pobyt_klienta& ob) {
+
+
+
+	//generowanie numeru zamowienia
+	srand(time(NULL));
+
+	zamowienie.nr_zamowienia = (rand() % 100) + 1;
+
+
+	//wyswietlenie informacji o zamowieniu
+	cout << "Szczegoly zlozonego zamowienia:" << endl;
+	int i, wybor;
+
+
+	cout << "Numer pokoju: " << zamowienie.nr_pokoju << endl;
+	cout << "Numer zamowienia: " << zamowienie.nr_zamowienia << endl;
+	cout << "Status: " << zamowienie.status << endl;
+	cout << "Posilki: ";
+	cout << koszyk.size() << endl;
+
+	for (i = 0; i < koszyk.size(); i++) {
+
+		cout << koszyk[i].nr_posilku << ". " << koszyk[i].nazwa_posilku << " - " << koszyk[i].cena << "zl." << endl;
+		ob.saldo += koszyk[i].cena; //dodanie kwoty do salda
+	}
+	cout << "Saldo: " << ob.saldo << " zl." << endl;
+	cout << "[1] Potwierdz zamowienie" << endl << "[2] Anuluj zamowienie (wszystkie wybrane posilki zostana bezpowrotnie usuniete z listy)" << endl;
+
+	for (;;) {
+		cout << "Wybor: ";
+		cin >> wybor;
+
+		if (wybor == 1) {
+
+			dodaj_do_listy(lista_zamowien, zamowienie);
+			cout << "Zamowienie potwierdzone!" << endl;
+			return;
+		}
+		else if (wybor == 2) {
+			cout << "Zamowienie anulowane" << endl;
+			koszyk.clear();
+			return;
+		}
+		else cout << "Nie ma takiego wyboru!" << endl;
+
+	}
+}
+
+
+//wyswietlanie tablicy posilkow
+inline void Kuchnia::wyswietl_menu() {
+
+
+	cout << "	MENU" << endl;
+	int i;
+	for (i = 0; i < 5; i++) {
+		cout << menu[i].nr_posilku << ". " << menu[i].nazwa_posilku << " - " << menu[i].cena << " zl. " << endl;
+
+	}
+
+}
+
+
+inline void Kuchnia::zamow_jedzenie(Zamowienie z1, Obecny_pobyt_klienta& ob) {
+	int w, nr, s;
+
+	wyswietl_menu();
+
+	for (;;) {
+
+
+
+		cout << "[1] Dodaj potrawe do koszyka" << endl;
+		cout << "[2] Wyswietl koszyk i potwierdz zamowienie " << endl << "[3] Anuluj zamowienie" << endl;
+		cout << "Wybor: ";
+		cin >> w;
+
+
+		switch (w) {
+
+		case 1:
+
+			for (;;) {
+				cout << "Podaj numer potrawy ktora chcesz zamowic: ";
+				cin >> nr;
+
+				if (nr >= 6) {
+					cout << "Nie ma potrawy o takim numerze!" << endl;
+
+
+
+				}
+				else if (nr < 6) {
+					z1.dodaj_do_koszyka(z1.koszyk, zwroc_info_o_posilku(nr));
+					cout << "Pomyslnie dodano do koszyka! Wybierz kolejne akcje" << endl;
+					break;
+				}
+
+
+
+			}
+
+			break;
+
+		case 2:
+			system("cls");
+			z1.potwierdz_zamowienie(lista_zamowien, z1, ob);
+			return;
+
+			break;
+
+		case 3:
+			cout << "Zrezygnowano ze skladania zamowienia." << endl;
+
+			return;
+			break;
+
+		default:
+			cout << "Nie ma takiego wyboru!" << endl;
+
+			break;
+
+		}
+
+	}
+	return;
+}
