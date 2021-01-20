@@ -1,1 +1,2 @@
 C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\Hotel_Test\x64\Debug\Hotel_Test.vcxproj.CopyComplete
+C:\Users\klata\Documents\GitHub\hotel\Hotel_Test\x64\Debug\Hotel_Test.vcxproj.CopyComplete

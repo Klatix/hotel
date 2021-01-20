@@ -15,8 +15,11 @@ int main() {
 	dostepnosc.koniec.push_back(dk3);
 
 	vector<Pokoj> lista_pokojow;
+	//vector<Pokoj>* lpwsk = &lista_pokojow;
 	Pokoj pokoj1(1, 450, 3, dostepnosc);
 	lista_pokojow.push_back(pokoj1);
+	vector<Rezerwacja_pokoju> lista_rezerwacji;
+	lista_rezerwacji.push_back(rez1);
 
 	//EXPECT_EQ(rez1.rezerwacja_pokoju(1, dp2, dk2, lista_pokojow), true);
 	//EXPECT_EQ(rez1.get_dokonano_rezerwacji(), true);

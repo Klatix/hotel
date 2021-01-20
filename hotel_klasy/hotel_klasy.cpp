@@ -94,92 +94,6 @@ struct Data {
 	}
 };
 
-class Klient :public User {
-private:
-	int ID;
-	string email;
-public:
-	string zwroc_dane() {
-		string dane_klienta = imie + " " + nazwisko;
-		return dane_klienta;
-	}
-	int zwroc_ID() {                               // zwraca ID
-		return ID;
-	}
-	void wprowadz_dane() {
-		cout << "Podaj imie: ";
-		cin >> imie;
-		cout << "Podaj nazwisko: ";
-		cin >> nazwisko;
-		cout << "Podaj email: ";
-		cin >> email;
-		ID = 100000 + rand() % 899999;              //dodanie generacji ID 
-		profesja = "Klient";                        // i profesji
-	}
-	Klient() {
-		imie = "Niezidentyfikowany";
-		nazwisko = "Klient";
-		email = "brak informacji";
-		ID = NULL;
-		profesja = "Klient";
-	}
-	Klient(string i, string n, string e) {
-		imie = i;
-		nazwisko = n;
-		email = e;
-		ID = 100000 + rand() % 899999;
-		profesja = "Klient";
-	}
-};
-
-
-
-class Kierownik :public User {
-public:
-	string zwroc_dane() {
-		string dane_pracownika = "(Kierownik) " + imie + " " + nazwisko;
-		return dane_pracownika;
-	}
-	Kierownik() {
-		imie = "Daniel";
-		nazwisko = "Klata";
-		profesja = "Kierownik";
-	}
-	Kierownik(string i, string n) {
-		imie = i;
-		nazwisko = n;
-		profesja = "Kierownik";
-	}
-	void potwierdz_zakwaterowanie(int ID_klienta) {
-
-	}
-	void potwierdz_wykwaterowanie(int ID_klienta) {
-
-	}
-};
-class Kelner :public User {
-public:
-	string zwroc_dane() {
-		string dane_pracownika = "(Kelner) " + imie + " " + nazwisko;
-		return dane_pracownika;
-	}
-	Kelner() {
-		imie = "Niezidentyfikowany";
-		nazwisko = "Pracownik";
-		profesja = "Kelner";
-	}
-	Kelner(string i, string n) {
-		imie = i;
-		nazwisko = n;
-		profesja = "Kelner";
-	}
-	void zmiana_statusu_zamowienia(int nr_zamowienia, string nowy_status) {
-
-	}
-	//void odbierz_zamowienie(Zamowienie zamowienie) {
-
-	//}
-};
 
 struct Rezerwacja_spa
 {
@@ -456,6 +370,7 @@ public:
 		if (data_konca.dzien - data_poczatku.dzien)
 			cout << "Koszt wybranego pokoju wynosi " << zarezerwowany_pokoj.cena << " za dobe, twoj pobyt trwa " << dlugosc_pobytu << " dni." << endl;
 		cout << "Calkowity koszt wyniesie " << dlugosc_pobytu * zarezerwowany_pokoj.cena << " PLN" << endl;
+		cout << "Teraz pobrana zostanie połowa kwoty, czyli " << (dlugosc_pobytu * zarezerwowany_pokoj.cena)/2 << " PLN, druga połowa płatna przy wykwaterowaniu." << endl;
 		cout << "Czy chcesz dokonac platnosci? " << endl << "[1] tak" << endl << "[2] nie" << endl;
 		int decyzja;
 		cin >> decyzja;
@@ -472,6 +387,9 @@ public:
 
 };
 
+
+
+
 class Obecny_pobyt_klienta {
 
 public:
@@ -479,32 +397,24 @@ public:
 
 	inline void rozpocznij_pobyt(Rezerwacja_pokoju& rezerwacja) {
 
+		int dlugosc_pobytu = ilosc_dni(rezerwacja.data_konca.rok, rezerwacja.data_konca.miesiac, rezerwacja.data_konca.dzien) - ilosc_dni(rezerwacja.data_poczatku.rok, rezerwacja.data_poczatku.miesiac, rezerwacja.data_poczatku.dzien);
 
-		saldo = saldo + 25 * (rezerwacja.data_konca.dzien - rezerwacja.data_poczatku.dzien);
+		saldo = (dlugosc_pobytu*rezerwacja.zarezerwowany_pokoj.cena)/2;
 
 	};
 
-	inline bool sprawdz_czy_przekroczono_termin(Rezerwacja_pokoju& rezerwacja, Data& data) {
+	inline bool sprawdz_czy_przekroczono_termin(Rezerwacja_pokoju rezerwacja) {
 
-
-		cout << "Wpisz date." << endl;
-		cout << "Godzina (bez minut):";
-		cin >> data.godzina;
-		cout << "Minuty: ";
-		cin >> data.minuta;
-		cout << "Dzien: ";
-		cin >> data.dzien;
-		cout << "Miesiac: ";
-		cin >> data.miesiac;
-		cout << "Rok";
-		cin >> data.rok;
+		Data data;
+		data.wpisz_date_ogolna();
 
 		if (cmp_date(rezerwacja.data_konca, data) == 1) {
+			nalicz_kare(rezerwacja, data);
 			return true;
 		}
 		else return false;
 
-
+		
 	};
 
 	inline void nalicz_kare(Rezerwacja_pokoju& rezerwacja, Data& data) {
@@ -513,8 +423,9 @@ public:
 		cout << "Saldo rezerwacji przed naliczeniem kary: " << saldo << " zl." << endl;
 
 		int kara = 25;
-		saldo += (data.dzien - rezerwacja.data_konca.dzien) * kara;
-
+		int dlugosc_bezprawnego_pobytu = ilosc_dni(data.rok,data.miesiac, data.dzien) - ilosc_dni(rezerwacja.data_konca.rok, rezerwacja.data_konca.miesiac, rezerwacja.data_konca.dzien);
+		saldo += dlugosc_bezprawnego_pobytu * kara;
+		
 		cout << "Saldo rachunku po naliczeniu kary (koncowa kwota do zaplaty): " << saldo << " zl." << endl;
 
 
@@ -543,6 +454,7 @@ public:
 
 			else if (kwota > saldo) {
 				cout << "Wplacona kwota jest wyzsza od naleznosci. Zwracamy reszte w wysokosci " << kwota - saldo << " zl." << endl;
+				saldo = 0;
 				cout << "Dziekujemy i zyczymy milego dnia!" << endl;
 				return;
 
@@ -551,6 +463,7 @@ public:
 			else if (kwota == saldo) {
 
 				cout << "Dziekujemy za wplate. Zyczymy milego dnia! " << endl;
+				saldo = 0;
 				return;
 
 			}
@@ -560,6 +473,96 @@ public:
 
 	};
 
+};
+
+class Klient :public User {
+private:
+	int ID;
+	bool zakwaterowany=false;
+	Obecny_pobyt_klienta pobyt;
+	Rezerwacja_pokoju rezerwacja;
+	string email;
+public:
+	string zwroc_dane() {
+		string dane_klienta = imie + " " + nazwisko;
+		return dane_klienta;
+	}
+	int zwroc_ID() {                               // zwraca ID
+		return ID;
+	}
+	void wprowadz_dane() {
+		cout << "Podaj imie: ";
+		cin >> imie;
+		cout << "Podaj nazwisko: ";
+		cin >> nazwisko;
+		cout << "Podaj email: ";
+		cin >> email;
+		ID = 100000 + rand() % 899999;              //dodanie generacji ID 
+		profesja = "Klient";                        // i profesji
+	}
+	Klient() {
+		imie = "Niezidentyfikowany";
+		nazwisko = "Klient";
+		email = "brak informacji";
+		ID = NULL;
+		profesja = "Klient";
+	}
+	Klient(string i, string n, string e) {
+		imie = i;
+		nazwisko = n;
+		email = e;
+		ID = 100000 + rand() % 899999;
+		profesja = "Klient";
+	}
+	friend class Kierownik;
+};
+
+class Kierownik :public User {
+public:
+	string zwroc_dane() {
+		string dane_pracownika = "(Kierownik) " + imie + " " + nazwisko;
+		return dane_pracownika;
+	}
+	Kierownik() {
+		imie = "Daniel";
+		nazwisko = "Klata";
+		profesja = "Kierownik";
+	}
+	Kierownik(string i, string n) {
+		imie = i;
+		nazwisko = n;
+		profesja = "Kierownik";
+	}
+	void potwierdz_zakwaterowanie(int ID_klienta, vector<Klient>& lista_klientow) {
+		
+		for (int i = 0; i < lista_klientow.size(); i++) {
+			if (lista_klientow[i].zwroc_ID() == ID_klienta) {
+				lista_klientow[i].pobyt.rozpocznij_pobyt(lista_klientow[i].rezerwacja);
+				lista_klientow[i].zakwaterowany = true;
+				return;
+			}
+		}
+		cout << "Klient o podanym ID nie istnieje! " << endl;
+
+	}
+	void potwierdz_wykwaterowanie(int ID_klienta, vector<Klient>& lista_klientow) {
+		for (int i = 0; i < lista_klientow.size(); i++) {
+			if (lista_klientow[i].zwroc_ID() == ID_klienta) {
+
+				if (lista_klientow[i].pobyt.sprawdz_stan_rachunku() == 0) {
+					lista_klientow[i].zakwaterowany == false;
+					lista_klientow[i].rezerwacja.usun_rezerwacje();
+				}
+				else if (lista_klientow[i].pobyt.sprawdz_czy_przekroczono_termin(lista_klientow[i].rezerwacja) == true) {
+					while (lista_klientow[i].pobyt.saldo != 0) {
+						lista_klientow[i].pobyt.oplac_naleznosc();
+					}
+					lista_klientow[i].zakwaterowany == false;
+					lista_klientow[i].rezerwacja.usun_rezerwacje();
+				}
+			}
+		}
+	}
 };
 
 struct Posilek {
@@ -603,6 +606,36 @@ public:
 	void dodaj_do_listy(vector <Zamowienie> lista_zamowien, Zamowienie zamowienie);
 	Posilek zwroc_info_o_posilku(int nr); //metoda zwracajaca informacje o posilku - nazwa, cena ?? NUMER
 
+};
+class Kelner :public User {
+public:
+	string zwroc_dane() {
+		string dane_pracownika = "(Kelner) " + imie + " " + nazwisko;
+		return dane_pracownika;
+	}
+	Kelner() {
+		imie = "Niezidentyfikowany";
+		nazwisko = "Pracownik";
+		profesja = "Kelner";
+	}
+	Kelner(string i, string n) {
+		imie = i;
+		nazwisko = n;
+		profesja = "Kelner";
+	}
+	void zmiana_statusu_zamowienia(int nr_zamowienia, string nowy_status, vector <Zamowienie> &lista_zamowien) {
+		for (int i = 0; i < lista_zamowien.size(); i++) {
+			if (lista_zamowien[i].nr_zamowienia == nr_zamowienia) {
+				lista_zamowien[i].status == nowy_status;
+				return;
+			}
+		}
+		cout << "Zamowienie o podanym numerze nie istnieje" << endl;
+
+	}
+	//void odbierz_zamowienie(Zamowienie zamowienie) {
+
+	//}
 };
 
 
