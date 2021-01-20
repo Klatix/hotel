@@ -141,7 +141,7 @@ int main() {
 			case 4:
 				//nie wiem czy uzywam dobrego obiektu rezerwacji, jak cos to prosze zmienaic jak juz bedzie pisana rezerwacja pokoju
 
-				if (ob1.sprawdz_czy_przekroczono_termin(r1, d1) == true) {
+				if (ob1.sprawdz_czy_przekroczono_termin(r1) == true) {
 
 					ob1.nalicz_kare(r1, d1);
 					ob1.oplac_naleznosc();
