@@ -1,5 +1,6 @@
 //#include <iostream>
 #include "hotel_klasy.cpp"
+
 int main() {
 	Rezerwacja_pokoju rez1;
 	Data dp1(1, 2, 2021);
@@ -97,30 +98,64 @@ int main() {
 		{
 			cout << "Podales bledne haslo!" << endl;
 		}
+
+
+
+
+
 	}
 	else if (wybor == 2)
 	{
-		int wybor=NULL;
+		int wybor = NULL;
 		int wybor_spa = NULL;
 		Klient klient1;
 		Spa infinitySpa;
-		Obecny_pobyt_klienta test1;
-		while(wybor != 7)
+		Obecny_pobyt_klienta ob1;
+		Posilek p1;
+		Zamowienie z1;
+		Kuchnia k1;
+		Data d1;
+		Rezerwacja_pokoju r1;
+		r1.data_konca.dzien = 7;
+
+		while (wybor != 7)
 		{
 			cout << "Wybierz opcje:\nRezerwacja pokoju\t[1]\nModyfikacja rezerwacji\t[2]\nZakwaterowanie\t\t[3]\nWykwaterowanie\t\t[4]\nZamawianie jedzenia\t[5]\nSpa\t\t\t[6]\nWyjscie\t\t\t[7]\nWybor: ";
 			cin >> wybor;
 			cout << endl;
-			switch(wybor)
+			switch (wybor)
 			{
 			case 1:
 				break;
 			case 2:
+
 				break;
 			case 3:
+				
+				ob1.rozpocznij_pobyt(r1);
+
 				break;
 			case 4:
+				//nie wiem czy uzywam dobrego obiektu rezerwacji, jak cos to prosze zmienaic jak juz bedzie pisana rezerwacja pokoju
+
+				if (ob1.sprawdz_czy_przekroczono_termin(r1, d1) == true) {
+
+					ob1.nalicz_kare(r1, d1);
+					ob1.oplac_naleznosc();
+					system("cls");
+					break;
+				}
+
+				else ob1.sprawdz_stan_rachunku();
+				ob1.oplac_naleznosc();
+				system("cls");
 				break;
 			case 5:
+
+				system("cls");
+				k1.zamow_jedzenie(z1, ob1);
+				system("cls");
+
 				break;
 			case 6:
 				wybor_spa = NULL;
@@ -136,7 +171,7 @@ int main() {
 					if (wybor_spa == 1)
 					{
 						infinitySpa.wyswietl_rezerwacje(lista_rezerwacji_basen);
-						
+
 					}
 					else if (wybor_spa == 2)
 					{
@@ -177,7 +212,7 @@ int main() {
 			//klient1.wypisz_uzytkownika();
 
 
-			
+
 			//Spa s4("BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25);
 
 			//s4.dodaj_rezerwacje(&lista_rezerwacji_basen, "BASEN", klient1.zwroc_ID(), 11, 45, 14, 10, 2021, 25)
@@ -197,5 +232,5 @@ int main() {
 	{
 		cout << "BLAD!" << endl;
 	}
-	
+
 }

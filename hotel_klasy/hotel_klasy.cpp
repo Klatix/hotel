@@ -61,7 +61,7 @@ struct Data {
 
 		if (dzien > 0 && dzien < 31 && miesiac > 0 && miesiac < 13 && rok > 2020)
 		{
-				//cout << "Data zostala zapisana!" << endl;
+			//cout << "Data zostala zapisana!" << endl;
 		}
 		else {
 			cout << "BLEDNIE WPROWADZONA DATA!" << endl;
@@ -81,7 +81,7 @@ struct Data {
 
 		if (dzien > 0 && dzien < 31 && miesiac > 0 && miesiac < 13 && rok > 2020 && godzina >= 0 && godzina < 25 && minuta >= 0 && minuta < 65)
 		{
-				//cout << "Data zostala zapisana!" << endl;
+			//cout << "Data zostala zapisana!" << endl;
 		}
 		else {
 			cout << "BLEDNIE WPROWADZONA DATA!" << endl;
@@ -191,9 +191,9 @@ struct Rezerwacja_spa
 class Spa :public Rezerwacja_spa {
 	Rezerwacja_spa lista;
 public:
-		Spa() {}
+	Spa() {}
 
-		Spa(string u, int id, int g, int m, int d, int mth, int y, int ile)
+	Spa(string u, int id, int g, int m, int d, int mth, int y, int ile)
 	{
 		usluga = u;
 		numer_ID = id;
@@ -487,22 +487,24 @@ public:
 	inline bool sprawdz_czy_przekroczono_termin(Rezerwacja_pokoju& rezerwacja, Data& data) {
 
 
-		cout << "Wpisz date." << endl;
-		cout << "Godzina (bez minut):";
-		cin >> data.godzina;
-		cout << "Minuty: ";
-		cin >> data.minuta;
-		cout << "Dzien: ";
+		cout << "Podaj date ( D M R ): " << endl;
 		cin >> data.dzien;
-		cout << "Miesiac: ";
 		cin >> data.miesiac;
-		cout << "Rok";
 		cin >> data.rok;
 
-		if (cmp_date(rezerwacja.data_konca, data) == 1) {
+		if (rezerwacja.data_konca.dzien < data.dzien) {
+
 			return true;
 		}
-		else return false;
+
+		/*
+		if (cmp_date(rezerwacja.data_konca, data) == 1) {
+			cout << endl << "Data nie zostala przekroczona." << endl;
+			return true;
+
+		}
+		*/
+		else cout << endl << "Data nie zostala przekroczona." << endl; return false;
 
 
 	};
@@ -510,7 +512,7 @@ public:
 	inline void nalicz_kare(Rezerwacja_pokoju& rezerwacja, Data& data) {
 
 		cout << "Przekroczono date pobytu, do rachunku zostanie naliczona kara." << endl;
-		cout << "Saldo rezerwacji przed naliczeniem kary: " << saldo << " zl." << endl;
+		cout << "Saldo rachunku przed naliczeniem kary: " << saldo << " zl." << endl;
 
 		int kara = 25;
 		saldo += (data.dzien - rezerwacja.data_konca.dzien) * kara;
@@ -545,6 +547,7 @@ public:
 				cout << "Wplacona kwota jest wyzsza od naleznosci. Zwracamy reszte w wysokosci " << kwota - saldo << " zl." << endl;
 				cout << "Dziekujemy i zyczymy milego dnia!" << endl;
 				return;
+
 
 			}
 

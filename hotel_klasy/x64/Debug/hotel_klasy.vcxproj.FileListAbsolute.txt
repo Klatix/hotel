@@ -3,3 +3,8 @@ C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\x64\Debug\hotel_kl
 C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\x64\Debug\hotel_klasy.pdb
 C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\x64\Debug\gtest.pdb
 C:\Users\mrwaj\OneDrive\Dokumenty\GitHub\hotel_io\hotel_klasy\x64\Debug\gtest_main.pdb
+C:\GIT\hotel\hotel_klasy\x64\Debug\hotel_klasy.vcxproj.CopyComplete
+C:\GIT\hotel\hotel_klasy\x64\Debug\hotel_klasy.exe
+C:\GIT\hotel\hotel_klasy\x64\Debug\hotel_klasy.pdb
+C:\GIT\hotel\hotel_klasy\x64\Debug\gtest.pdb
+C:\GIT\hotel\hotel_klasy\x64\Debug\gtest_main.pdb
