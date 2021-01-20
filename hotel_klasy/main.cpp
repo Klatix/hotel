@@ -16,11 +16,8 @@ int main() {
 	dostepnosc.koniec.push_back(dk3);
 
 	vector<Pokoj> lista_pokojow;
-	//vector<Pokoj>* lpwsk = &lista_pokojow;
 	Pokoj pokoj1(1, 450, 3, dostepnosc);
 	lista_pokojow.push_back(pokoj1);
-	vector<Rezerwacja_pokoju> lista_rezerwacji;
-	lista_rezerwacji.push_back(rez1);
 
 	//EXPECT_EQ(rez1.rezerwacja_pokoju(1, dp2, dk2, lista_pokojow), true);
 	//EXPECT_EQ(rez1.get_dokonano_rezerwacji(), true);
@@ -36,17 +33,14 @@ int main() {
 	Spa b2("BASEN", klient1.zwroc_ID(), 12, 30, 14, 10, 2021, 55);
 	Spa b3("BASEN", klient1.zwroc_ID(), 13, 30, 18, 10, 2021, 25);
 	Spa b4("BASEN", klient1.zwroc_ID(), 17, 00, 22, 10, 2021, 25);
-
 	lista_rezerwacji_basen.push_back(b1);
 	lista_rezerwacji_basen.push_back(b2);
 	lista_rezerwacji_basen.push_back(b3);
 	lista_rezerwacji_basen.push_back(b4);
-
 	Spa s1("SAUNA", klient1.zwroc_ID(), 10, 30, 11, 12, 2021, 45);
 	Spa s2("SAUNA", klient1.zwroc_ID(), 12, 30, 14, 12, 2021, 55);
 	Spa s3("SAUNA", klient1.zwroc_ID(), 13, 30, 18, 12, 2021, 25);
 	Spa s4("SAUNA", klient1.zwroc_ID(), 17, 00, 22, 12, 2021, 25);
-
 	lista_rezerwacji_sauna.push_back(s1);
 	lista_rezerwacji_sauna.push_back(s2);
 	lista_rezerwacji_sauna.push_back(s3);
@@ -82,28 +76,33 @@ int main() {
 	///////////////////////////
 
 	srand(time(NULL));
-	cout << "Jestem:\nPracownikiem\t[1]\nKlientem\t[2]\nWybor: ";
+	cout << "Jestem:\nPracownikiem\t[1]\nKlientem\t[2]\nKelnerem\t[3]\nWybor: ";
 	int wybor;
 	cin >> wybor;
 	cout << endl;
 	if (wybor == 1)
 	{
+		int wybor = NULL;
 		string haslo;
+
 		cout << "Podaj haslo: ";
 		cin >> haslo;
 		cout << endl;
 		if (haslo == "admin")
 		{
 			cout << "Podales poprawne haslo!" << endl;
-			//wybor co chce robic
+			while (wybor != 3)
+			{
+				cout << "Wybierz opcje:\nZarzadzanie zakwaterowaiem\t[1]\nZarzadzanie wykwaterowaiem\t[2]\nWyjscie\t\t\t\t[3]\nWybor:";
+				cin >> wybor;
+				cout << endl;
+			}
+
 		}
 		else
 		{
 			cout << "Podales bledne haslo!" << endl;
 		}
-
-
-
 
 
 	}
@@ -121,9 +120,9 @@ int main() {
 		Rezerwacja_pokoju r1;
 		r1.data_konca.dzien = 7;
 
-		while (wybor != 7)
+		while (wybor != 5)
 		{
-			cout << "Wybierz opcje:\nRezerwacja pokoju\t[1]\nModyfikacja rezerwacji\t[2]\nZakwaterowanie\t\t[3]\nWykwaterowanie\t\t[4]\nZamawianie jedzenia\t[5]\nSpa\t\t\t[6]\nWyjscie\t\t\t[7]\nWybor: ";
+			cout << "Wybierz opcje:\nRezerwacja pokoju\t[1]\nModyfikacja rezerwacji\t[2]\nZamawianie jedzenia\t[3]\nSpa\t\t\t[4]\nWyjscie\t\t\t[5]\nWybor: ";
 			cin >> wybor;
 			cout << endl;
 			switch (wybor)
@@ -134,33 +133,13 @@ int main() {
 
 				break;
 			case 3:
-				
-				ob1.rozpocznij_pobyt(r1);
-
-				break;
-			case 4:
-				//nie wiem czy uzywam dobrego obiektu rezerwacji, jak cos to prosze zmienaic jak juz bedzie pisana rezerwacja pokoju
-
-				if (ob1.sprawdz_czy_przekroczono_termin(r1) == true) {
-
-					ob1.nalicz_kare(r1, d1);
-					ob1.oplac_naleznosc();
-					system("cls");
-					break;
-				}
-
-				else ob1.sprawdz_stan_rachunku();
-				ob1.oplac_naleznosc();
-				system("cls");
-				break;
-			case 5:
 
 				system("cls");
 				k1.zamow_jedzenie(z1, ob1);
 				system("cls");
 
 				break;
-			case 6:
+			case 4:
 				wybor_spa = NULL;
 				cout << "Chce zarezerwowac:\nBasen\t[1]\nSaune\t[2]\nWybor: ";
 				cin >> wybor_spa;
@@ -178,7 +157,7 @@ int main() {
 					}
 					else if (wybor_spa == 2)
 					{
-						infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID(), "BASEN");
+						infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID(), "BASEN", ob1);
 						lista_rezerwacji_basen.push_back(infinitySpa);
 					}
 					cout << endl;
@@ -193,7 +172,7 @@ int main() {
 					}
 					else if (wybor_spa == 2)
 					{
-						infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID(), "SAUNA");
+						infinitySpa.dodaj_rezerwacje(klient1.zwroc_ID(), "SAUNA", ob1);
 						lista_rezerwacji_sauna.push_back(infinitySpa);
 					}
 					cout << endl;
@@ -203,14 +182,13 @@ int main() {
 					break;
 				}
 				break;
-			case 7:
-				wybor == 7;
+			case 5:
+				wybor == 5;
 				break;
 			default:
 				cout << "Blad! Wybierz ponownie!" << endl;
 			}
 
-			Klient klient1;
 			//klient1.wprowadz_dane();
 			//klient1.wypisz_uzytkownika();
 
@@ -230,6 +208,10 @@ int main() {
 			//s1.wyswietl_rezerwacje(lista_rezerwacji_basen);
 			//cout << s1.zwroc_dane_spa() << endl;
 		}
+	}
+	else if (wybor == 3)
+	{
+		//tu kelner
 	}
 	else
 	{
