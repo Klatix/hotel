@@ -4,16 +4,16 @@
 
 int main() {
 
-////////////////////
-//DATA BANK
-//zawiera informacje o wszelkich obiektach wykorzystywanych w trakcie dzialania programu
-////////////////////
+	////////////////////
+	//DATA BANK
+	//zawiera informacje o wszelkich obiektach wykorzystywanych w trakcie dzialania programu
+	////////////////////
 	Rezerwacja_pokoju rez1;
 	Kuchnia k1;
 	Klient klient1;
 	Kierownik kierownik1;
 	vector<Klient> lista_klientow;
-	
+
 	Spa infinitySpa;
 	Obecny_pobyt_klienta ob1;
 	Posilek p1;
@@ -137,6 +137,8 @@ int main() {
 						system("pause");
 						klient1.rezerwacja.wybierz_pokoj(lista_pokojow);
 						lista_klientow.push_back(klient1);
+						system("pause");
+						system("cls");
 					}
 					else {
 						cout << "Dokonano juz rezerwacji" << endl;
@@ -145,10 +147,13 @@ int main() {
 				case 2:
 					if (klient1.rezerwacja.get_dokonano_rezerwacji() == true) {
 						klient1.rezerwacja.modyfikuj_rezerwacje();
+						Sleep(1500);
+						system("cls");
 					}
 					else {
 						cout << "Brak rezerwacji" << endl;
-						Sleep(3000);
+						Sleep(2000);
+						system("cls");
 					}
 					break;
 				case 3:
