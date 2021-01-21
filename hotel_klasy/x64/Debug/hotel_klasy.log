@@ -1,17 +1,10 @@
-﻿  hotel_klasy.cpp
+﻿  main.cpp
 C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(511,38): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
 C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(518,38): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
 C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(604,30): warning C4834: odrzucanie zwracanej wartości funkcji z atrybutem „nodiscard”
 C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(650,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
 C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(710,13): warning C4101: "s": lokalna zmienna, do której nie istnieje odwołanie
-  main.cpp
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(511,38): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(518,38): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(604,30): warning C4834: odrzucanie zwracanej wartości funkcji z atrybutem „nodiscard”
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(650,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(710,13): warning C4101: "s": lokalna zmienna, do której nie istnieje odwołanie
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\main.cpp(52,13): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
-C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\main.cpp(217,12): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
-  Generowanie kodu...
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\main.cpp(53,13): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\main.cpp(221,12): warning C4553: „==”: Wynik wyrażenia nie jest używany; czy chodziło Ci o „=”?
 C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\hotel_klasy.cpp(643): warning C4715: "Kuchnia::zwroc_info_o_posilku”: niewszystkie ścieżki kodu zwracają wartość
   hotel_klasy.vcxproj -> C:\Users\klata\Documents\GitHub\hotel\hotel_klasy\x64\Debug\hotel_klasy.exe

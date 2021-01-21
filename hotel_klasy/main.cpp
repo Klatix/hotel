@@ -47,13 +47,17 @@ int main() {
 	vector<Spa> lista_rezerwacji_sauna;
 
 	///////////////////////////
+	int wybor;
 	for (;;) {
 		system("cls");
 		srand(time(NULL));
-		cout << "Jestem:\nRecepcjonista\t[1]\nKlientem\t[2]\nKelnerem\t[3]\nWybor: ";
-		int wybor;
+		cout << "Wyjscie z programu \t[0]\nJestem:\nRecepcjonista\t\t[1]\nKlientem\t\t[2]\nKelnerem\t\t[3]\nWybor: ";
+		
 		int id;
 		cin >> wybor;
+		if (wybor == 0) {
+			exit(0);
+		}
 		cout << endl;
 		system("cls");
 		if (wybor == 1)
